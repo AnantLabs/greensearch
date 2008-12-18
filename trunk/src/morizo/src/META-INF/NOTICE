@@ -1,0 +1,39 @@
+// ------------------------------------------------------------------
+// NOTICE file corresponding to the section 4d of The Apache License,
+// Version 2.0, in this case for Apache MyFaces Trinidad Blank Demo
+// ------------------------------------------------------------------
+
+Apache MyFaces Trinidad Blank Demo
+Copyright 2001-2008 The Apache Software Foundation
+
+This product includes/uses software(s) developed by 'an unknown organization'
+  - Unnamed - commons-beanutils:commons-beanutils:jar:1.7.0
+  - Unnamed - commons-digester:commons-digester:jar:1.6
+  - Unnamed - javax.servlet:jstl:jar:1.1.0
+
+This product includes/uses software(s) developed by 'Apache Software Foundation' (http://www.apache.org)
+  - Unnamed - commons-collections:commons-collections:jar:3.1
+
+This product includes/uses software(s) developed by 'Apache Software Foundation' (http://www.apache.org/)
+  - API (http://myfaces.apache.org/projects/myfaces-api)
+      License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+  - Impl (http://myfaces.apache.org)
+      License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+
+This product includes/uses software(s) developed by 'The Apache Software Foundation' (http://jakarta.apache.org)
+  - Codec (http://jakarta.apache.org/commons/codec/)
+      License: The Apache Software License, Version 2.0  (/LICENSE.txt)
+  - EL (http://jakarta.apache.org/commons/el/)
+      License: The Apache Software License, Version 2.0  (/LICENSE.txt)
+  - Lang (http://jakarta.apache.org/commons/${pom.artifactId.substring(8)}/)
+      License: The Apache Software License, Version 2.0  (/LICENSE.txt)
+
+This product includes/uses software(s) developed by 'The Apache Software Foundation' (http://www.apache.org/)
+  - Commons Logging (http://commons.apache.org/logging)
+      License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+  - Apache MyFaces Trinidad API (http://myfaces.apache.org/trinidad/trinidad-api)
+      License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+  - Apache MyFaces Trinidad Impl (http://myfaces.apache.org/trinidad/trinidad-impl)
+      License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+
+
