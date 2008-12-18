@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:trh="http://myfaces.apache.org/trinidad/html"
+	xmlns:tr="http://myfaces.apache.org/trinidad">
+	<jsp:directive.page language="java"
+		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
+	<f:view>
+		<tr:document title="ファイルシステムクローラ設定">
+			<tr:form>
+				<tr:page>
+					<tr:panelHeader text="完了">
+						<tr:outputText value="全てのプロセスが正常に終了しました。" />
+						<tr:goLink destination="/" text="戻る" />
+					</tr:panelHeader>
+				</tr:page>
+			</tr:form>
+		</tr:document>
+	</f:view>
+</jsp:root>

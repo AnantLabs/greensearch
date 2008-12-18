@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:trh="http://myfaces.apache.org/trinidad/html"
+	xmlns:tr="http://myfaces.apache.org/trinidad">
+	<jsp:directive.page language="java"
+		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
+	<f:view>
+		<tr:document title="ファイルシステムクローラ設定">
+			<tr:form>
+				<tr:panelPage>
+					<f:facet name="branding">
+						<tr:outputLabel value="Green Search"
+							inlineStyle="font-size: xx-large; color: green" />
+					</f:facet>
+					<f:facet name="navigationGlobal">
+						<tr:navigationPane hint="buttons">
+							<tr:commandNavigationItem text="ヘルプ" action="index"
+								selected="true" />
+						</tr:navigationPane>
+					</f:facet>
+					<f:facet name="navigation1">
+						<tr:navigationPane hint="tab">
+							<tr:commandNavigationItem text="基本設定" action="index"
+								selected="true" />
+							<tr:commandNavigationItem text="定期実行設定" action="index" />
+							<tr:commandNavigationItem text="レポート" action="report" />
+						</tr:navigationPane>
+					</f:facet>
+					<f:facet name="navigation2">
+						<tr:navigationPane hint="bar">
+							<tr:commandNavigationItem text="基本設定" action="index"
+								selected="true" />
+						</tr:navigationPane>
+					</f:facet>
+					<f:facet name="navigation3">
+						<tr:navigationPane hint="list">
+							<tr:commandNavigationItem text="基本設定" action="index"
+								selected="true" />
+							<tr:commandNavigationItem text="定期実行設定" action="index" />
+							<tr:commandNavigationItem text="レポート" action="report" />
+						</tr:navigationPane>
+					</f:facet>
+					<tr:messages />
+					<tr:panelGroupLayout layout="vertical">
+						<tr:panelHeader text="ファイルシステムクローラ設定">
+							<tr:outputText value="ファイルシステムクーローラに関する設定を行います。" />
+							<tr:panelHeader text="検索サーバーURL設定">
+								<tr:inputText label="検索サーバーURL" id="solrUrl"
+									value="#{test.solrUrl}" columns="30" required="true">
+									<f:facet name="help">
+										<tr:outputText value="検索サーバーのURLを指定してください。" />
+									</f:facet>
+								</tr:inputText>
+							</tr:panelHeader>
+							<!-- tr:panelHeader text="検索サーバーのリポジトリ設定">
+								<tr:inputText label="検索サーバーディレクトリ" id="serverDir"
+									value="#{test.serverDir}" columns="30" required="true">
+									<f:facet name="help">
+										<tr:outputText value="検索サーバーがインストールされているディレクトリを指定してください。" />
+									</f:facet>
+								</tr:inputText>
+							</tr:panelHeader -->
+							<tr:panelHeader text="ディレクトリ設定">
+								<tr:inputText label="クロールディレクトリ" id="directoryStr"
+									value="#{test.directoryStr}" columns="100" required="true">
+									<f:facet name="help">
+										<tr:outputText value="クローリングをスタートするディレクトリを入力してください。" />
+									</f:facet>
+								</tr:inputText>
+							</tr:panelHeader>
+							<tr:commandButton text="クローラ実行" action="#{test.startCrowl}" />
+						</tr:panelHeader>
+					</tr:panelGroupLayout>
+					<f:facet name="appCopyright">
+						<tr:outputText value="2008 Green Search" />
+					</f:facet>
+				</tr:panelPage>
+			</tr:form>
+		</tr:document>
+	</f:view>
+</jsp:root>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:trh="http://myfaces.apache.org/trinidad/html"
+	xmlns:tr="http://myfaces.apache.org/trinidad">
+	<jsp:directive.page language="java"
+		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
+	<f:view>
+		<tr:document title="ファイルシステムクローラ設定">
+			<tr:form>
+				<tr:page>
+					<tr:panelHeader text="クローリングを実行中です">
+						<tr:outputText value="以下に実行ステータスが表示されます。" />
+						<tr:messages />
+						<tr:poll interval="2000" id="pollid" />
+						<tr:panelCaptionGroup captionText="各プロセスのチェックリスト">
+							<tr:panelGroupLayout layout="horizontal">
+								<tr:spacer width="30" />
+								<tr:panelGroupLayout layout="vertical" partialTriggers="pollid"
+									id="pg1">
+
+									<!-- ファイルシステムへアクセスし、インデックスを作成しています。 -->
+									<tr:panelGroupLayout layout="horizontal">
+										<tr:spacer width="13"
+											rendered="#{0 > test.progressModels.jobid}" />
+										<tr:image source="/images/processCheck.gif"
+											rendered="#{test.progressModels.jobid >= 0}" />
+										<tr:spacer width="5" />
+										<tr:outputText value="ファイルシステムへアクセスし、インデックスを作成しています。"
+											styleClass="AFFieldText" />
+										<tr:progressIndicator id="progressid" partialTriggers="pollid" action="progressEnd"
+											value="#{test.progressModels.boundedRangeModels[0]}">
+											<tr:outputFormatted styleUsage="instruction" value="実行待ち"
+												rendered="#{test.progressModels.boundedRangeModels[0].value == -1 or test.progressModels.boundedRangeModels[0].value == -1}" />
+											<tr:outputFormatted styleUsage="instruction"
+												value="#{test.progressModels.boundedRangeModels[0].value} / #{test.progressModels.boundedRangeModels[0].maximum} ファイルをインデックスしました。"
+												rendered="#{test.progressModels.boundedRangeModels[0].value > -1 and test.progressModels.boundedRangeModels[0].value > -1}" />
+										</tr:progressIndicator>
+									</tr:panelGroupLayout>
+
+									<!-- 文章行列を作成しています。 -->
+									<!--tr:panelGroupLayout layout="horizontal">
+										<tr:spacer width="13"
+											rendered="#{1 > test.progressModels.jobid}" />
+										<tr:image source="/images/processCheck.gif"
+											rendered="#{test.progressModels.jobid >= 1}" />
+										<tr:spacer width="5" />
+										<tr:outputText value="文章行列を作成しています。" styleClass="AFFieldText" />
+										<tr:progressIndicator id="progressid" partialTriggers="pollid"
+											value="#{test.progressModels.boundedRangeModels[1]}">
+											<tr:outputFormatted styleUsage="instruction" value="実行待ち"
+												rendered="#{test.progressModels.boundedRangeModels[1].value == -1 or test.progressModels.boundedRangeModels[1].value == -1}" />
+											<tr:outputFormatted styleUsage="instruction"
+												value="#{test.progressModels.boundedRangeModels[1].value} / #{test.progressModels.boundedRangeModels[1].maximum} 語を処理しました。"
+												rendered="#{test.progressModels.boundedRangeModels[1].value > -1 and test.progressModels.boundedRangeModels[1].value > -1}" />
+										</tr:progressIndicator>
+									</tr:panelGroupLayout -->
+
+									<!-- 文章行列を転置しています。 -->
+									<!--tr:panelGroupLayout layout="horizontal">
+										<tr:spacer width="13"
+											rendered="#{2 > test.progressModels.jobid}" />
+										<tr:image source="/images/processCheck.gif"
+											rendered="#{test.progressModels.jobid >= 2}" />
+										<tr:spacer width="5" />
+										<tr:outputText value="文章行列を転置しています。" styleClass="AFFieldText" />
+										<tr:progressIndicator id="progressid" partialTriggers="pollid"
+											value="#{test.progressModels.boundedRangeModels[2]}">
+											<tr:outputFormatted styleUsage="instruction" value="実行待ち"
+												rendered="#{test.progressModels.boundedRangeModels[2].value == -1 or test.progressModels.boundedRangeModels[2].value == -1}" />
+											<tr:outputFormatted styleUsage="instruction"
+												value="#{test.progressModels.boundedRangeModels[2].value} / #{test.progressModels.boundedRangeModels[2].maximum} 文章を処理しました。"
+												rendered="#{test.progressModels.boundedRangeModels[2].value > -1 and test.progressModels.boundedRangeModels[2].value > -1}" />
+										</tr:progressIndicator>
+									</tr:panelGroupLayout -->
+
+									<!-- 意味空間を解析しています。 -->
+									<!--tr:panelGroupLayout layout="horizontal">
+										<tr:spacer width="13"
+											rendered="#{3 > test.progressModels.jobid}" />
+										<tr:image source="/images/processCheck.gif"
+											rendered="#{test.progressModels.jobid >= 3}" />
+										<tr:spacer width="5" />
+										<tr:outputText value="意味空間を解析しています。" styleClass="AFFieldText" />
+										<tr:progressIndicator id="progressid" partialTriggers="pollid"
+											value="#{test.progressModels.boundedRangeModels[3]}">
+											<tr:outputFormatted styleUsage="instruction" value="実行待ち"
+												rendered="#{test.progressModels.boundedRangeModels[3].value == -1 or test.progressModels.boundedRangeModels[3].value == -1}" />
+											<tr:outputFormatted styleUsage="instruction"
+												value="#{test.progressModels.boundedRangeModels[3].value} / #{test.progressModels.boundedRangeModels[3].maximum} の解析を終了しました。"
+												rendered="#{test.progressModels.boundedRangeModels[3].value > -1 and test.progressModels.boundedRangeModels[3].value > -1}" />
+										</tr:progressIndicator>
+									</tr:panelGroupLayout -->
+
+									<!-- インデックスの圧縮を行っています。 -->
+									<!-- tr:panelGroupLayout layout="horizontal">
+										<tr:spacer width="13"
+											rendered="#{4 > test.progressModels.jobid}" />
+										<tr:image source="/images/processCheck.gif"
+											rendered="#{test.progressModels.jobid >= 4}" />
+										<tr:spacer width="5" />
+										<tr:outputText value="意味情報をインデックスに保存しています。"
+											styleClass="AFFieldText" />
+										<tr:progressIndicator id="progressid" action="progressEnd"
+											partialTriggers="pollid"
+											value="#{test.progressModels.boundedRangeModels[4]}">
+											<tr:outputFormatted styleUsage="instruction" value="実行待ち"
+												rendered="#{test.progressModels.boundedRangeModels[4].value == -1 or test.progressModels.boundedRangeModels[4].value == -1}" />
+											<tr:outputFormatted styleUsage="instruction"
+												value="#{test.progressModels.boundedRangeModels[4].value} / #{test.progressModels.boundedRangeModels[4].maximum} の意味保存を終了しました。"
+												rendered="#{test.progressModels.boundedRangeModels[4].value > -1 and test.progressModels.boundedRangeModels[4].value > -1}" />
+										</tr:progressIndicator>
+									</tr:panelGroupLayout -->
+								</tr:panelGroupLayout>
+							</tr:panelGroupLayout>
+						</tr:panelCaptionGroup>
+
+					</tr:panelHeader>
+				</tr:page>
+				<tr:outputText value="2008 Green Search" />
+			</tr:form>
+		</tr:document>
+	</f:view>
+</jsp:root>
