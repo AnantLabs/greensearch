@@ -23,19 +23,19 @@
 									<!-- ファイルシステムへアクセスし、インデックスを作成しています。 -->
 									<tr:panelGroupLayout layout="horizontal">
 										<tr:spacer width="13"
-											rendered="#{0 > test.progressModels.jobid}" />
+											rendered="#{0 > conf.progressModels.jobid}" />
 										<tr:image source="/images/processCheck.gif"
-											rendered="#{test.progressModels.jobid >= 0}" />
+											rendered="#{conf.progressModels.jobid >= 0}" />
 										<tr:spacer width="5" />
 										<tr:outputText value="ファイルシステムへアクセスし、インデックスを作成しています。"
 											styleClass="AFFieldText" />
 										<tr:progressIndicator id="progressid" partialTriggers="pollid" action="progressEnd"
-											value="#{test.progressModels.boundedRangeModels[0]}">
+											value="#{conf.progressModels.boundedRangeModels[0]}">
 											<tr:outputFormatted styleUsage="instruction" value="実行待ち"
-												rendered="#{test.progressModels.boundedRangeModels[0].value == -1 or test.progressModels.boundedRangeModels[0].value == -1}" />
+												rendered="#{conf.progressModels.boundedRangeModels[0].value == -1 or conf.progressModels.boundedRangeModels[0].value == -1}" />
 											<tr:outputFormatted styleUsage="instruction"
-												value="#{test.progressModels.boundedRangeModels[0].value} / #{test.progressModels.boundedRangeModels[0].maximum} ファイルをインデックスしました。"
-												rendered="#{test.progressModels.boundedRangeModels[0].value > -1 and test.progressModels.boundedRangeModels[0].value > -1}" />
+												value="#{conf.progressModels.boundedRangeModels[0].value} / #{conf.progressModels.boundedRangeModels[0].maximum} ファイルをインデックスしました。"
+												rendered="#{conf.progressModels.boundedRangeModels[0].value > -1 and conf.progressModels.boundedRangeModels[0].value > -1}" />
 										</tr:progressIndicator>
 									</tr:panelGroupLayout>
 

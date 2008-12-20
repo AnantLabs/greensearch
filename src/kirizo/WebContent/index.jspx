@@ -7,6 +7,7 @@
 	<jsp:directive.page language="java"
 		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
 	<f:view>
+		<f:loadBundle basename="green.message" var="msg" />
 		<tr:document title="ファイルシステムクローラ設定">
 			<tr:form>
 				<tr:panelPage>
@@ -16,30 +17,33 @@
 					</f:facet>
 					<f:facet name="navigationGlobal">
 						<tr:navigationPane hint="buttons">
-							<tr:commandNavigationItem text="ヘルプ" action="index"
-								selected="true" />
+							<tr:commandNavigationItem text="#{msg['green.index.help']}"
+								action="index" selected="true" />
 						</tr:navigationPane>
 					</f:facet>
 					<f:facet name="navigation1">
 						<tr:navigationPane hint="tab">
-							<tr:commandNavigationItem text="基本設定" action="index"
+							<tr:commandNavigationItem
+								text="#{msg['green.index.basicsetting']}" action="index"
 								selected="true" />
-							<tr:commandNavigationItem text="定期実行設定" action="index" />
-							<tr:commandNavigationItem text="レポート" action="report" />
+							<tr:commandNavigationItem text="#{msg['green.index.report']}"
+								action="report" />
 						</tr:navigationPane>
 					</f:facet>
 					<f:facet name="navigation2">
 						<tr:navigationPane hint="bar">
-							<tr:commandNavigationItem text="基本設定" action="index"
+							<tr:commandNavigationItem
+								text="#{msg['green.index.basicsetting']}" action="index"
 								selected="true" />
 						</tr:navigationPane>
 					</f:facet>
 					<f:facet name="navigation3">
 						<tr:navigationPane hint="list">
-							<tr:commandNavigationItem text="基本設定" action="index"
+							<tr:commandNavigationItem
+								text="#{msg['green.index.basicsetting']}" action="index"
 								selected="true" />
-							<tr:commandNavigationItem text="定期実行設定" action="index" />
-							<tr:commandNavigationItem text="レポート" action="report" />
+							<tr:commandNavigationItem text="#{msg['green.index.report']}"
+								action="report" />
 						</tr:navigationPane>
 					</f:facet>
 					<tr:messages />
@@ -48,7 +52,7 @@
 							<tr:outputText value="ファイルシステムクーローラに関する設定を行います。" />
 							<tr:panelHeader text="検索サーバーURL設定">
 								<tr:inputText label="検索サーバーURL" id="solrUrl"
-									value="#{test.solrUrl}" columns="30" required="true">
+									value="#{conf.solrUrl}" columns="30" required="true">
 									<f:facet name="help">
 										<tr:outputText value="検索サーバーのURLを指定してください。" />
 									</f:facet>
@@ -56,7 +60,7 @@
 							</tr:panelHeader>
 							<!-- tr:panelHeader text="検索サーバーのリポジトリ設定">
 								<tr:inputText label="検索サーバーディレクトリ" id="serverDir"
-									value="#{test.serverDir}" columns="30" required="true">
+									value="#{conf.serverDir}" columns="30" required="true">
 									<f:facet name="help">
 										<tr:outputText value="検索サーバーがインストールされているディレクトリを指定してください。" />
 									</f:facet>
@@ -64,13 +68,13 @@
 							</tr:panelHeader -->
 							<tr:panelHeader text="ディレクトリ設定">
 								<tr:inputText label="クロールディレクトリ" id="directoryStr"
-									value="#{test.directoryStr}" columns="100" required="true">
+									value="#{conf.directoryStr}" columns="100" required="true">
 									<f:facet name="help">
 										<tr:outputText value="クローリングをスタートするディレクトリを入力してください。" />
 									</f:facet>
 								</tr:inputText>
 							</tr:panelHeader>
-							<tr:commandButton text="クローラ実行" action="#{test.startCrowl}" />
+							<tr:commandButton text="クローラ実行" action="#{conf.startCrowl}" />
 						</tr:panelHeader>
 					</tr:panelGroupLayout>
 					<f:facet name="appCopyright">

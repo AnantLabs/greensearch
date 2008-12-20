@@ -23,7 +23,6 @@
 					<f:facet name="navigation1">
 						<tr:navigationPane hint="tab">
 							<tr:commandNavigationItem text="基本設定" action="index" />
-							<tr:commandNavigationItem text="定期実行設定" action="index" />
 							<tr:commandNavigationItem text="レポート" action="report"
 								selected="true" />
 						</tr:navigationPane>
@@ -37,7 +36,6 @@
 					<f:facet name="navigation3">
 						<tr:navigationPane hint="list">
 							<tr:commandNavigationItem text="基本設定" action="index" />
-							<tr:commandNavigationItem text="定期実行設定" action="index" />
 							<tr:commandNavigationItem text="レポート" action="report"
 								selected="true" />
 						</tr:navigationPane>
