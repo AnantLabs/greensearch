@@ -39,11 +39,11 @@
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
-		<managed-bean-name>test</managed-bean-name>
+		<managed-bean-name>conf</managed-bean-name>
 		<managed-bean-class>
 			green.search.crawler.main.ConfigInfo
 		</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
+		<managed-bean-scope>application</managed-bean-scope>
 	</managed-bean>
 
 	<!-- Global navigation rules -->
