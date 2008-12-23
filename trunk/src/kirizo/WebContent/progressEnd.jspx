@@ -9,12 +9,44 @@
 	<f:view>
 		<tr:document title="ファイルシステムクローラ設定">
 			<tr:form>
-				<tr:page>
+				<tr:panelPage>
+					<f:facet name="branding">
+						<tr:outputLabel value="Green Search"
+							inlineStyle="font-size: xx-large; color: green" />
+					</f:facet>
+					<f:facet name="navigationGlobal">
+						<tr:navigationPane hint="buttons">
+							<tr:commandNavigationItem text="ヘルプ" action="index"
+								selected="true" />
+						</tr:navigationPane>
+					</f:facet>
+					<f:facet name="navigation1">
+						<tr:navigationPane hint="tab">
+							<tr:commandNavigationItem text="基本設定" action="index" />
+							<tr:commandNavigationItem text="プロセス" action="progressStart"
+								selected="true" />
+							<tr:commandNavigationItem text="レポート" action="report" />
+						</tr:navigationPane>
+					</f:facet>
+					<f:facet name="navigation2">
+						<tr:navigationPane hint="bar">
+							<tr:commandNavigationItem text="プロセス" action="report"
+								selected="true" />
+						</tr:navigationPane>
+					</f:facet>
+					<f:facet name="navigation3">
+						<tr:navigationPane hint="list">
+							<tr:commandNavigationItem text="基本設定" action="index" />
+							<tr:commandNavigationItem text="プロセス" action="progressStart"
+								selected="true" />
+							<tr:commandNavigationItem text="レポート" action="report" />
+						</tr:navigationPane>
+					</f:facet>
 					<tr:panelHeader text="完了">
 						<tr:outputText value="全てのプロセスが正常に終了しました。" />
 						<tr:goLink destination="/" text="戻る" />
 					</tr:panelHeader>
-				</tr:page>
+				</tr:panelPage>
 			</tr:form>
 		</tr:document>
 	</f:view>
