@@ -7,10 +7,47 @@
 	<jsp:directive.page language="java"
 		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
 	<f:view>
-		<tr:document title="ファイルシステムクローラ設定">
+		<f:loadBundle basename="green.message" var="msg" />
+		<tr:document title="ファイルシステムクローラ状況">
 			<tr:form>
-				<tr:page>
-					<tr:panelHeader text="クローリングを実行中です">
+				<tr:panelPage>
+					<f:facet name="branding">
+						<tr:outputLabel value="Green Search"
+							inlineStyle="font-size: xx-large; color: green" />
+					</f:facet>
+					<f:facet name="navigationGlobal">
+						<tr:navigationPane hint="buttons">
+							<tr:commandNavigationItem text="#{msg['green.index.help']}"
+								action="index" selected="true" />
+						</tr:navigationPane>
+					</f:facet>
+					<f:facet name="navigation1">
+						<tr:navigationPane hint="tab">
+							<tr:commandNavigationItem
+								text="#{msg['green.index.basicsetting']}" action="index" />
+							<tr:commandNavigationItem text="プロセス" action="progressStart"
+								selected="true" />
+							<tr:commandNavigationItem text="#{msg['green.index.report']}"
+								action="report" />
+						</tr:navigationPane>
+					</f:facet>
+					<f:facet name="navigation2">
+						<tr:navigationPane hint="bar">
+							<tr:commandNavigationItem text="プロセス" action="index"
+								selected="true" />
+						</tr:navigationPane>
+					</f:facet>
+					<f:facet name="navigation3">
+						<tr:navigationPane hint="list">
+							<tr:commandNavigationItem
+								text="#{msg['green.index.basicsetting']}" action="index" />
+							<tr:commandNavigationItem text="プロセス" action="progressStart"
+								selected="true" />
+							<tr:commandNavigationItem text="#{msg['green.index.report']}"
+								action="report" />
+						</tr:navigationPane>
+					</f:facet>
+					<tr:panelHeader text="クローリング状況">
 						<tr:outputText value="以下に実行ステータスが表示されます。" />
 						<tr:messages />
 						<tr:poll interval="2000" id="pollid" />
@@ -29,7 +66,7 @@
 										<tr:spacer width="5" />
 										<tr:outputText value="ファイルシステムへアクセスし、インデックスを作成しています。"
 											styleClass="AFFieldText" />
-										<tr:progressIndicator id="progressid" partialTriggers="pollid" action="progressEnd"
+										<tr:progressIndicator id="progressid" partialTriggers="pollid"
 											value="#{conf.progressModels.boundedRangeModels[0]}">
 											<tr:outputFormatted styleUsage="instruction" value="実行待ち"
 												rendered="#{conf.progressModels.boundedRangeModels[0].value == -1 or conf.progressModels.boundedRangeModels[0].value == -1}" />
@@ -40,22 +77,24 @@
 									</tr:panelGroupLayout>
 
 									<!-- 文章行列を作成しています。 -->
-									<!--tr:panelGroupLayout layout="horizontal">
+									<tr:panelGroupLayout layout="horizontal">
 										<tr:spacer width="13"
 											rendered="#{1 > test.progressModels.jobid}" />
 										<tr:image source="/images/processCheck.gif"
-											rendered="#{test.progressModels.jobid >= 1}" />
+											rendered="#{conf.progressModels.jobid >= 1}" />
 										<tr:spacer width="5" />
-										<tr:outputText value="文章行列を作成しています。" styleClass="AFFieldText" />
+										<tr:outputText value="インデックスリポジトリの意味を解析しています。"
+											styleClass="AFFieldText" />
 										<tr:progressIndicator id="progressid" partialTriggers="pollid"
-											value="#{test.progressModels.boundedRangeModels[1]}">
+											action="progressEnd"
+											value="#{conf.progressModels.boundedRangeModels[1]}">
 											<tr:outputFormatted styleUsage="instruction" value="実行待ち"
-												rendered="#{test.progressModels.boundedRangeModels[1].value == -1 or test.progressModels.boundedRangeModels[1].value == -1}" />
+												rendered="#{conf.progressModels.boundedRangeModels[1].value == -1 or conf.progressModels.boundedRangeModels[1].value == -1}" />
 											<tr:outputFormatted styleUsage="instruction"
-												value="#{test.progressModels.boundedRangeModels[1].value} / #{test.progressModels.boundedRangeModels[1].maximum} 語を処理しました。"
-												rendered="#{test.progressModels.boundedRangeModels[1].value > -1 and test.progressModels.boundedRangeModels[1].value > -1}" />
+												value="#{conf.progressModels.boundedRangeModels[1].value} / #{conf.progressModels.boundedRangeModels[1].maximum} を処理しました。"
+												rendered="#{conf.progressModels.boundedRangeModels[1].value > -1 and conf.progressModels.boundedRangeModels[1].value > -1}" />
 										</tr:progressIndicator>
-									</tr:panelGroupLayout -->
+									</tr:panelGroupLayout>
 
 									<!-- 文章行列を転置しています。 -->
 									<!--tr:panelGroupLayout layout="horizontal">
@@ -117,8 +156,10 @@
 						</tr:panelCaptionGroup>
 
 					</tr:panelHeader>
-				</tr:page>
-				<tr:outputText value="2008 Green Search" />
+					<f:facet name="appCopyright">
+						<tr:outputText value="2008 Green Search" />
+					</f:facet>
+				</tr:panelPage>
 			</tr:form>
 		</tr:document>
 	</f:view>
