@@ -5,13 +5,11 @@ import green.search.crawler.fs.FsCrawler;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Date;
 
 import org.apache.solr.client.solrj.SolrServerException;
 
-public class WorkerThread extends Thread implements Serializable {
+public class WorkerThread extends Thread {
 
 	static BoundedRangeModelHodler holder = null;
 
@@ -36,13 +34,17 @@ public class WorkerThread extends Thread implements Serializable {
 	}
 
 	public static void startImmediate() {
+		START = true;
+	}
 
-		IMMEDIATE = true;
+	public static boolean isStart() {
+		return START;
 	}
 
 	public static void saveInfo(BoundedRangeModelHodler holder, ConfigInfo info) {
 		WorkerThread.holder = holder;
 		WorkerThread.info = info;
+		System.out.println("### config info = " + WorkerThread.info);
 	}
 
 	/*
@@ -56,12 +58,15 @@ public class WorkerThread extends Thread implements Serializable {
 		try {
 			while (true) {
 				Thread.sleep(1000 * 1);
-				checkStartStatus();
-				if ((info != null && START) || IMMEDIATE) {
+				if (info != null) {
+					ConfigInfoHolder.setConfigInfo(info);
+				}
+				if (info != null && START) {
 					crawl();
 					START = false;
 					IMMEDIATE = false;
 				}
+				checkStartStatus();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -90,6 +95,7 @@ public class WorkerThread extends Thread implements Serializable {
 		BoundedRangeModelHodler.set(holder);
 		// クローリングの開始
 		holder.get(0).setValue(0);
+		long startTime = System.currentTimeMillis();
 		FsCrawler crawler = new FsCrawler();
 		crawler.initSolrClient(info.getSolrUrl());
 		File startDir = new File(info.getDirectoryStr());
@@ -98,9 +104,22 @@ public class WorkerThread extends Thread implements Serializable {
 		}
 		crawler.crawl(startDir);
 		crawler.commit();
+		// 進捗にステップの完了を報告
+		holder.get().setJobid(holder.get().getJobid() + 1);
+
+		holder.get(1).setValue(0);
+		holder.get(1).setMaximum(1);
 		if (info.getOptimaze()) {
 			crawler.optimize();
 		}
+		holder.get(1).setValue(1);
+		// 進捗にステップの完了を報告
+		holder.get().setJobid(holder.get().getJobid() + 1);
+
+		long endTime = System.currentTimeMillis();
+		ReportInfo rinfo = new ReportInfo(crawler.getFileNum(),
+				(endTime - startTime) / 1000);
+		ReportHolder.addReport(rinfo);
 	}
 
 	/**
