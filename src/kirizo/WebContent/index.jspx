@@ -58,14 +58,6 @@
 									</f:facet>
 								</tr:inputText>
 							</tr:panelHeader>
-							<!-- tr:panelHeader text="検索サーバーのリポジトリ設定">
-								<tr:inputText label="検索サーバーディレクトリ" id="serverDir"
-									value="#{conf.serverDir}" columns="30" required="true">
-									<f:facet name="help">
-										<tr:outputText value="検索サーバーがインストールされているディレクトリを指定してください。" />
-									</f:facet>
-								</tr:inputText>
-							</tr:panelHeader -->
 							<tr:panelHeader text="ディレクトリ設定">
 								<tr:inputText label="クロールディレクトリ" id="directoryStr"
 									value="#{conf.directoryStr}" columns="100" required="true">
@@ -74,6 +66,24 @@
 									</f:facet>
 								</tr:inputText>
 							</tr:panelHeader>
+							<tr:panelHeader text="定期実行設定" id="execstatus">
+								<tr:selectOneChoice label="定期実行設定" value="#{conf.execstatus}">
+									<tr:selectItem label="日次" value="day" />
+									<tr:selectItem label="週次" value="week" />
+									<f:facet name="help">
+										<tr:outputText value="週時の場合は、日曜日の0:00 分に実行されます。" />
+									</f:facet>
+								</tr:selectOneChoice>
+							</tr:panelHeader>
+							<tr:panelHeader text="意味解析設定">
+								<tr:selectBooleanCheckbox id="optimaze"
+									label="インデックスの後に意味解析を行うかどうか" value="#{conf.optimaze}" />
+							</tr:panelHeader>
+							<tr:panelHeader text="リポジトリ設定">
+								<tr:selectBooleanCheckbox id="delete"
+									label="リポジトリの内容を削除してからインデックスする" value="#{conf.delete}" />
+							</tr:panelHeader>
+							<tr:commandButton text="保存" action="#{conf.saveInfo}" />
 							<tr:commandButton text="クローラ実行" action="#{conf.startCrowl}" />
 						</tr:panelHeader>
 					</tr:panelGroupLayout>
