@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -30,6 +29,8 @@ public class FsCrawler {
 	private static int JOBID = 0;
 
 	private SolrServer server = null;
+
+	private List<File> files;
 
 	/**
 	 * SolrClientを初期化する。
@@ -63,11 +64,10 @@ public class FsCrawler {
 	public void crawl(File startDir) throws CrawlerException, IOException,
 			SolrServerException {
 		FsAccessPlanner planner = new FsAccessPlanner(startDir);
-		List<File> files = planner.getAccessList();
+		files = planner.getAccessList();
 		int num = files.size();
 		// 進捗管理に最大数を登録。
 		BoundedRangeModelHodler.get().get(JOBID).setMaximum(num);
-		UpdateResponse res = null;
 		for (int i = 0; i < num; i++) {
 			File file = files.get(i);
 			// 読み込み可能でなければアクセスしない。
@@ -94,7 +94,7 @@ public class FsCrawler {
 			doc.addField("timestamp", new Date(file.lastModified()));
 
 			try {
-				res = this.server.add(doc);
+				this.server.add(doc);
 			} catch (SolrServerException e) {
 				e.printStackTrace();
 				Logger.getAnonymousLogger().log(Level.INFO, e.getMessage(), e);
@@ -108,9 +108,15 @@ public class FsCrawler {
 			BoundedRangeModelHodler.get().get(JOBID).setValue(i + 1);
 		}
 
-		// 進捗にステップの完了を報告
-		BoundedRangeModelHodler.get().setJobid(
-				BoundedRangeModelHodler.get().getJobid() + 1);
+	}
+
+	/**
+	 * クロールしたファイル数を返す。
+	 * 
+	 * @return
+	 */
+	public int getFileNum() {
+		return files.size();
 	}
 
 	/**
@@ -169,27 +175,5 @@ public class FsCrawler {
 
 		UpdateResponse res = this.server.deleteByQuery("*:*");
 		res = this.server.commit();
-	}
-
-	/**
-	 * 実行エントリ
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// File startDir = new File("C:\\Documents and
-		// Settings\\haruyosi\\デスクトップ");
-		File startDir = new File("Z:\\public_html\\techs\\オープンソース");
-		FsCrawler cl = new FsCrawler();
-		try {
-			String url = "http://localhost:8080/morry";
-			cl.initSolrClient(url);
-			cl.removeAll();
-			cl.crawl(startDir);
-			cl.search("content:オープンソース");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 }
