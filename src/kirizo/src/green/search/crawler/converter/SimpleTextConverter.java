@@ -1,5 +1,8 @@
 package green.search.crawler.converter;
 
+import green.search.crawler.main.ConfigInfo;
+import green.search.crawler.main.ConfigInfoHolder;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -57,8 +60,8 @@ public class SimpleTextConverter extends AbstractDocumentConverter implements
 		StringBuffer stbf = new StringBuffer();
 		try {
 			FileInputStream fin = new FileInputStream(super.file);
-			// InputStreamReader isr = new InputStreamReader(fin, "JISAutoDetect");
-			InputStreamReader isr = new InputStreamReader(fin, "UTF-8");
+			ConfigInfo info = ConfigInfoHolder.getConfigInfo();
+			InputStreamReader isr = new InputStreamReader(fin, info.getEncoding());
 			BufferedReader br = new BufferedReader(isr);
 			String s;
 			while ((s = br.readLine()) != null) {
