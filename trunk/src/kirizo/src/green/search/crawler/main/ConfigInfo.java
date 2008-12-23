@@ -31,8 +31,18 @@ public class ConfigInfo implements Serializable {
 	private String execstatus = "week";
 
 	private boolean optimaze = true;
-	
+
 	private boolean delete = true;
+
+	private String encoding = "UTF8";
+
+	public String getEncoding() {
+		return encoding;
+	}
+
+	public void setEncoding(String encoding) {
+		this.encoding = encoding;
+	}
 
 	public boolean isDelete() {
 		return delete;
@@ -75,9 +85,13 @@ public class ConfigInfo implements Serializable {
 
 	private static void initPocess() {
 		if (HOLDER.size() != 0) {
-			HOLDER = new BoundedRangeModelHodler();
-			HOLDER.set(0, new DefaultBoundedRangeModel(-1, 1));
+			if (!WorkerThread.isStart()) {
+				HOLDER = new BoundedRangeModelHodler();
+				HOLDER.set(0, new DefaultBoundedRangeModel(-1, 1));
+				HOLDER.set(1, new DefaultBoundedRangeModel(-1, 1));
+			}
 		} else {
+			HOLDER.addBoundedRangeModel(new DefaultBoundedRangeModel(-1, 1));
 			HOLDER.addBoundedRangeModel(new DefaultBoundedRangeModel(-1, 1));
 		}
 	}
