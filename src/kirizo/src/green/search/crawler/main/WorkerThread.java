@@ -1,25 +1,48 @@
 package green.search.crawler.main;
 
-import green.search.crawler.fs.FsCrawler; // import green.search.crawler.lsi.matrix.SparseMatrix;
-// import green.search.lsi.LsaFacade;
+import green.search.crawler.CrawlerException;
+import green.search.crawler.fs.FsCrawler;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
+
+import org.apache.solr.client.solrj.SolrServerException;
 
 public class WorkerThread extends Thread implements Serializable {
 
-	BoundedRangeModelHodler holder;
+	static BoundedRangeModelHodler holder = null;
 
-	ConfigInfo info;
+	static ConfigInfo info = null;
 
-	/**
-	 * @param holder
-	 * @param info
-	 */
-	public WorkerThread(BoundedRangeModelHodler holder, ConfigInfo info) {
-		this.holder = holder;
-		this.info = info;
+	static boolean START = false;
+
+	static boolean IMMEDIATE = false;
+
+	static WorkerThread kirizo = null;
+
+	static {
+		if (kirizo == null || !kirizo.isAlive()) {
+			kirizo = new WorkerThread();
+			kirizo.setName("kirizo");
+			kirizo.start();
+		}
+		System.out.println("### kirizo スレッドを開始します。");
+	}
+
+	public WorkerThread() {
+	}
+
+	public static void startImmediate() {
+
+		IMMEDIATE = true;
+	}
+
+	public static void saveInfo(BoundedRangeModelHodler holder, ConfigInfo info) {
+		WorkerThread.holder = holder;
+		WorkerThread.info = info;
 	}
 
 	/*
@@ -30,54 +53,53 @@ public class WorkerThread extends Thread implements Serializable {
 	@Override
 	public void run() {
 
-		BoundedRangeModelHodler.set(this.holder);
-		// SparseMatrix sm = null, tsm = null;
 		try {
-			// クローリングの開始
-			holder.get(0).setValue(0);
-			FsCrawler crawler = new FsCrawler();
-			crawler.initSolrClient(info.getSolrUrl());
-			File startDir = new File(info.getDirectoryStr());
-			crawler.removeAll();
-			crawler.crawl(startDir);
-			crawler.commit();
-			crawler.optimize();
-
-			// // 意味インデックスの作成
-			// holder.get(1).setValue(0);
-			// LsaFacade lsafacade = new LsaFacade(info);
-			// sm = lsafacade.createCrsMatrix("CRS");
-			// traceMatrix(sm, false);
-			// // 行列の転置
-			// holder.get(2).setValue(0);
-			// // tsm = sm.transpose(sm, "CCS", true);
-			// // traceMatrix(tsm, true);
-			//
-			// // 意味空間の解析
-			// holder.get(3).setValue(0);
-			// lsafacade.executeLatentSemanticAnalysis(sm);
-			// // 解析結果をLuceneに保存する。
-			// holder.get(4).setValue(0);
-			// lsafacade.saveIndex();
-			//
-			// sm.close();
-			// // tsm.close();
-			//
-			// sm.relese();
-			// // tsm.relese();
-
+			while (true) {
+				Thread.sleep(1000 * 1);
+				checkStartStatus();
+				if ((info != null && START) || IMMEDIATE) {
+					crawl();
+					START = false;
+					IMMEDIATE = false;
+				}
+			}
 		} catch (Exception e) {
-			// try {
-			// if (sm != null)
-			// sm.close();
-			// if (tsm != null)
-			// tsm.close();
-			// } catch (IOException e1) {
-			// // TODO Auto-generated catch block
-			// e1.printStackTrace();
-			// }
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+
+	private void checkStartStatus() {
+		Calendar now = Calendar.getInstance();
+		if (info.getExecstatus().equals("week")) {
+			int d = now.get(Calendar.DAY_OF_WEEK);
+			int h = now.get(Calendar.HOUR_OF_DAY);
+			int m = now.get(Calendar.MINUTE);
+			START = (d == Calendar.SUNDAY && h == 0 && m == 0);
+			// System.out.println("### kirizo week " + d + " : " + h + " : " +
+			// m);
+		} else if (info.getExecstatus().equals("day")) {
+			int h = now.get(Calendar.HOUR_OF_DAY);
+			int m = now.get(Calendar.MINUTE);
+			START = (h == 0 && m == 0);
+			// System.out.println("### kirizo day " + h + " : " + m);
+		}
+	}
+
+	private void crawl() throws SolrServerException, IOException,
+			CrawlerException {
+		BoundedRangeModelHodler.set(holder);
+		// クローリングの開始
+		holder.get(0).setValue(0);
+		FsCrawler crawler = new FsCrawler();
+		crawler.initSolrClient(info.getSolrUrl());
+		File startDir = new File(info.getDirectoryStr());
+		if (info.isDelete()) {
+			crawler.removeAll();
+		}
+		crawler.crawl(startDir);
+		crawler.commit();
+		if (info.getOptimaze()) {
+			crawler.optimize();
 		}
 	}
 
@@ -104,13 +126,4 @@ public class WorkerThread extends Thread implements Serializable {
 	// // }
 	// // System.out.println();
 	// }
-	/**
-	 * @param a
-	 * @param b
-	 * @return
-	 */
-	int imax(int a, int b) {
-		return (a > b) ? a : b;
-	}
-
 }

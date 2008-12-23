@@ -16,26 +16,60 @@ import org.apache.myfaces.trinidad.model.DefaultBoundedRangeModel;
 
 public class ConfigInfo implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	protected static BoundedRangeModelHodler HOLDER = new BoundedRangeModelHodler();
 
 	static {
 		initPocess();
 	}
 
-	protected volatile transient WorkerThread _processThread = null;
-
 	private String directoryStr;
 
 	private String solrUrl = "http://localhost:8080/morry/";
 
-	public String startCrowl() {
-		if (_processThread == null || !_processThread.isAlive()) {
-			initPocess();
-			_processThread = new WorkerThread(HOLDER, this);
-			_processThread.setName("kirizo");
-			_processThread.start();
+	private String execstatus = "week";
 
-		}
+	private boolean optimaze = true;
+	
+	private boolean delete = true;
+
+	public boolean isDelete() {
+		return delete;
+	}
+
+	public void setDelete(boolean delete) {
+		this.delete = delete;
+	}
+
+	public boolean getOptimaze() {
+		return optimaze;
+	}
+
+	public void setOptimaze(boolean optimaze) {
+		this.optimaze = optimaze;
+	}
+
+	public String getExecstatus() {
+		return execstatus;
+	}
+
+	public void setExecstatus(String execstatus) {
+		this.execstatus = execstatus;
+	}
+
+	public String saveInfo() {
+		WorkerThread.saveInfo(HOLDER, this);
+		return "index";
+	}
+
+	public String startCrowl() {
+
+		this.saveInfo();
+
+		initPocess();
+		WorkerThread.startImmediate();
+
 		return "progressStart";
 	}
 
@@ -50,10 +84,6 @@ public class ConfigInfo implements Serializable {
 
 	public BoundedRangeModelHodler getProgressModels() {
 		return HOLDER;
-	}
-
-	protected void endProcess() {
-		_processThread = null;
 	}
 
 	public String getDirectoryStr() {
