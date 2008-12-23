@@ -23,6 +23,7 @@
 					<f:facet name="navigation1">
 						<tr:navigationPane hint="tab">
 							<tr:commandNavigationItem text="基本設定" action="index" />
+							<tr:commandNavigationItem text="プロセス" action="progressStart" />
 							<tr:commandNavigationItem text="レポート" action="report"
 								selected="true" />
 						</tr:navigationPane>
@@ -36,6 +37,7 @@
 					<f:facet name="navigation3">
 						<tr:navigationPane hint="list">
 							<tr:commandNavigationItem text="基本設定" action="index" />
+							<tr:commandNavigationItem text="プロセス" action="progressStart" />
 							<tr:commandNavigationItem text="レポート" action="report"
 								selected="true" />
 						</tr:navigationPane>
@@ -43,15 +45,17 @@
 					<tr:messages />
 					<tr:panelGroupLayout layout="vertical">
 						<tr:panelHeader text="クローリングレポート">
-							<tr:outputText value="クローリングレポートに関する説明。" />
+							<tr:outputText value="クローラーがアクセスしたページ数とインデックスに要した時間をレポートします。" />
 							<tr:panelGroupLayout layout="horizontal">
 								<tr:panelHeader text="アクセスしたページ数">
-									<tr:chart id="accessFileChart" YMajorGridLineCount="7"
-										type="horizontalBar" inlineStyle="width:300px; height:200px;" />
+									<tr:chart id="accessFileChart" type="verticalBar"
+										inlineStyle="width:300px; height:200px;"
+										value="#{chart.pageValue}" />
 								</tr:panelHeader>
 								<tr:panelHeader text="クローリングを終えるのに要した時間">
-									<tr:chart id="accessFileChart"
-										inlineStyle="width:300px; height:200px;" />
+									<tr:chart id="accessTimeChart"
+										inlineStyle="width:300px; height:200px;"
+										value="#{chart.timeValue}" />
 								</tr:panelHeader>
 							</tr:panelGroupLayout>
 						</tr:panelHeader>
