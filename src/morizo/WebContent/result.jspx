@@ -7,6 +7,7 @@
 	<jsp:directive.page language="java"
 		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
 	<f:view>
+		<f:loadBundle basename="green.message" var="msg" />
 		<tr:document title="Search Top">
 			<tr:form defaultCommand="searchBtn">
 				<tr:panelGroupLayout layout="horizontal">
@@ -15,16 +16,22 @@
 					<tr:panelGroupLayout layout="vertical">
 						<tr:panelGroupLayout layout="horizontal">
 							<tr:inputText label="Search:" value="#{searchBean.query}" />
-							<tr:commandButton id="searchBtn" text="検索"
+							<tr:commandButton id="searchBtn"
+								text="#{msg['green.result.searchBtn']}"
 								action="#{searchBean.search}" />
 						</tr:panelGroupLayout>
 						<tr:panelGroupLayout layout="horizontal">
 							<tr:spacer width="50" height="0" />
-							<tr:selectOneRadio label="ソート順" value="#{searchBean.sort}"
-								layout="horizontal">
-								<tr:selectItem label="ファイル名" value="title" />
-								<tr:selectItem label="概念" value="lsa" />
-								<tr:selectItem label="作成日" value="date" />
+							<tr:selectOneRadio label="#{msg['green.result.sortRadio']}"
+								value="#{searchBean.sort}" layout="horizontal">
+								<tr:selectItem
+									label="#{msg['green.result.sortRadio.item.filename']}"
+									value="title" />
+								<tr:selectItem
+									label="#{msg['green.result.sortRadio.item.concept']}"
+									value="lsa" />
+								<tr:selectItem
+									label="#{msg['green.result.sortRadio.item.date']}" value="date" />
 							</tr:selectOneRadio>
 						</tr:panelGroupLayout>
 					</tr:panelGroupLayout>
@@ -79,7 +86,7 @@
 									width="100%" summary="Search Result"
 									value="#{searchBean.result}">
 									<f:facet name="actions">
-										<tr:outputText value="検索結果　"
+										<tr:outputText value="#{msg['green.result.title']}"
 											inlineStyle="white-space: nowrap;" />
 									</f:facet>
 									<tr:column headerText="title">
@@ -91,8 +98,8 @@
 										<!-- tr:commandLink text="#{row.title}" action="dialog:download"
 											useWindow="true" windowWidth="250" windowHeight="250"
 											returnListener="#{row.retuenLsn}" / -->
-										<tr:outputText value="  #{row.id}" />
-										<tr:outputText value="  #{row.docDate}" />
+										<tr:outputText value="#{row.id}" />
+										<tr:outputText value="#{row.docDate}" />
 									</tr:column>
 									<f:facet name="detailStamp">
 										<tr:outputDocument value="#{row.shortContent}" />

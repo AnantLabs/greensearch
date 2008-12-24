@@ -5,6 +5,7 @@
 	<jsp:directive.page language="java"
 		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
 	<f:view>
+		<f:loadBundle basename="green.message" var="msg" />
 		<tr:document title="Search Top">
 			<tr:form defaultCommand="searchBtn">
 				<tr:panelGroupLayout layout="horizontal">
@@ -57,7 +58,7 @@
 						<f:verbatim>
 							<tr:panelGroupLayout layout="horizontal">
 								<tr:inputText label="Search:" value="#{searchBean.query}" />
-								<tr:commandButton id="searchBtn" text="検索"
+								<tr:commandButton id="searchBtn" text="#{msg['green.index.searchBtn']}"
 									action="#{searchBean.search}" />
 							</tr:panelGroupLayout>
 						</f:verbatim>
