@@ -91,7 +91,7 @@ public class FsCrawler {
 			doc.addField("title", file.getName());
 			doc.addField("content", text);
 
-			doc.addField("timestamp", new Date(file.lastModified()));
+			doc.addField("documentdt", new Date(file.lastModified()));
 
 			try {
 				this.server.add(doc);
