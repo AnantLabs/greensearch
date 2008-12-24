@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:trh="http://myfaces.apache.org/trinidad/html"
+	xmlns:tr="http://myfaces.apache.org/trinidad">
+	<jsp:directive.page language="java"
+		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
+	<f:view>
+		<f:loadBundle basename="green.message" var="msg" />
+		<tr:document title="#{msg['green.index.title']}">
+			<tr:form>
+				<tr:panelPage>
+					<f:facet name="branding">
+						<tr:outputLabel value="Green Search"
+							inlineStyle="font-size: xx-large; color: green" />
+					</f:facet>
+					<f:facet name="navigationGlobal">
+						<tr:navigationPane hint="buttons">
+							<tr:commandNavigationItem text="#{msg['green.index.help']}"
+								action="index" selected="true" />
+						</tr:navigationPane>
+					</f:facet>
+					<f:facet name="navigation1">
+						<tr:navigationPane hint="tab">
+							<tr:commandNavigationItem
+								text="#{msg['green.index.basesetting']}" action="index"
+								selected="true" />
+							<tr:commandNavigationItem text="#{msg['green.index.prosess']}"
+								action="progressStart" />
+							<tr:commandNavigationItem text="#{msg['green.index.report']}"
+								action="report" />
+						</tr:navigationPane>
+					</f:facet>
+					<f:facet name="navigation2">
+						<tr:navigationPane hint="bar">
+							<tr:commandNavigationItem
+								text="#{msg['green.index.basesetting']}" action="index"
+								selected="true" />
+						</tr:navigationPane>
+					</f:facet>
+					<f:facet name="navigation3">
+						<tr:navigationPane hint="list">
+							<tr:commandNavigationItem
+								text="#{msg['green.index.basesetting']}" action="index"
+								selected="true" />
+							<tr:commandNavigationItem text="#{msg['green.index.prosess']}"
+								action="progressStart" />
+							<tr:commandNavigationItem text="#{msg['green.index.report']}"
+								action="report" />
+						</tr:navigationPane>
+					</f:facet>
+					<tr:messages />
+					<tr:panelGroupLayout layout="vertical">
+						<tr:panelHeader text="#{msg['green.index.doc.title']}">
+							<tr:outputText value="#{msg['green.index.doc.description']}" />
+							<tr:panelHeader text="#{msg['green.index.doc.url.title']}">
+								<tr:inputText label="#{msg['green.index.doc.url.label']}"
+									id="solrUrl" value="#{conf.solrUrl}" columns="30"
+									required="true">
+									<f:facet name="help">
+										<tr:outputText value="#{msg['green.index.doc.url.help']}" />
+									</f:facet>
+								</tr:inputText>
+							</tr:panelHeader>
+							<tr:panelHeader text="#{msg['green.index.doc.directory.title']}">
+								<tr:inputText label="#{msg['green.index.doc.directory.label']}"
+									id="directoryStr" value="#{conf.directoryStr}" columns="100"
+									required="true">
+									<f:facet name="help">
+										<tr:outputText
+											value="#{msg['green.index.doc.directory.help']}" />
+									</f:facet>
+								</tr:inputText>
+							</tr:panelHeader>
+							<tr:panelHeader text="#{msg['green.index.doc.execution.title']}"
+								id="execstatus">
+								<tr:selectOneChoice
+									label="#{msg['green.index.doc.execution.label']}"
+									value="#{conf.execstatus}">
+									<tr:selectItem
+										label="#{msg['green.index.doc.execution.item.day']}"
+										value="day" />
+									<tr:selectItem
+										label="#{msg['green.index.doc.execution.item.week']}"
+										value="week" />
+									<f:facet name="help">
+										<tr:outputText
+											value="#{msg['green.index.doc.execution.help']}" />
+									</f:facet>
+								</tr:selectOneChoice>
+							</tr:panelHeader>
+							<tr:panelHeader text="#{msg['green.index.doc.anaraiz.title']}">
+								<tr:selectBooleanCheckbox id="optimaze"
+									label="#{msg['green.index.doc.anaraiz.label']}"
+									value="#{conf.optimaze}" />
+							</tr:panelHeader>
+							<tr:panelHeader text="#{msg['green.index.doc.repository.title']}">
+								<tr:selectBooleanCheckbox id="delete"
+									label="#{msg['green.index.doc.repository.label']}"
+									value="#{conf.delete}" />
+							</tr:panelHeader>
+							<tr:panelHeader text="#{msg['green.index.doc.encode.title']}"
+								id="encoding">
+								<tr:selectOneChoice
+									label="#{msg['green.index.doc.encode.label']}"
+									value="#{conf.encoding}">
+									<tr:selectItem label="ISO8859_1" value="ISO8859_1" />
+									<tr:selectItem label="ISO8859_2" value="ISO8859_2" />
+									<tr:selectItem label="ISO8859_4" value="ISO8859_4" />
+									<tr:selectItem label="ISO8859_5" value="ISO8859_5" />
+									<tr:selectItem label="ISO8859_7" value="ISO8859_7" />
+									<tr:selectItem label="ISO8859_9" value="ISO8859_9" />
+									<tr:selectItem label="ISO8859_13" value="ISO8859_13" />
+									<tr:selectItem label="ISO8859_15" value="ISO8859_15" />
+									<tr:selectItem label="KOI8_R" value="KOI8_R" />
+									<tr:selectItem label="ASCII" value="ASCII" />
+									<tr:selectItem label="UTF8" value="UTF8" />
+									<tr:selectItem label="UTF-16" value="UTF-16" />
+									<tr:selectItem label="UnicodeBigUnmarked"
+										value="UnicodeBigUnmarked" />
+									<tr:selectItem label="UnicodeLittleUnmarked"
+										value="UnicodeLittleUnmarked" />
+									<tr:selectItem label="Cp1250" value="Cp1250" />
+									<tr:selectItem label="Cp1251" value="Cp1251" />
+									<tr:selectItem label="Cp1252" value="Cp1252" />
+									<tr:selectItem label="Cp1253" value="Cp1253" />
+									<tr:selectItem label="Cp1254" value="Cp1254" />
+									<tr:selectItem label="Cp1257" value="Cp1257" />
+									<tr:selectItem label="Big5" value="Big5" />
+									<tr:selectItem label="Big5_HKSCS" value="Big5_HKSCS" />
+									<tr:selectItem label="EUC_JP" value="EUC_JP" />
+									<tr:selectItem label="EUC_KR" value="EUC_KR" />
+									<tr:selectItem label="GB18030" value="GB18030" />
+									<tr:selectItem label="EUC_CN" value="EUC_CN" />
+									<tr:selectItem label="GBK" value="GBK" />
+									<tr:selectItem label="Cp838" value="Cp838" />
+									<tr:selectItem label="Cp858" value="Cp858" />
+									<tr:selectItem label="Cp1140" value="Cp1140" />
+									<tr:selectItem label="Cp1141" value="Cp1141" />
+									<tr:selectItem label="Cp1142" value="Cp1142" />
+									<tr:selectItem label="Cp1143" value="Cp1143" />
+									<tr:selectItem label="Cp1144" value="Cp1144" />
+									<tr:selectItem label="Cp1145" value="Cp1145" />
+									<tr:selectItem label="Cp1146" value="Cp1146" />
+									<tr:selectItem label="Cp1147" value="Cp1147" />
+									<tr:selectItem label="Cp1148" value="Cp1148" />
+									<tr:selectItem label="Cp1149" value="Cp1149" />
+									<tr:selectItem label="Cp037" value="Cp037" />
+									<tr:selectItem label="Cp1026" value="Cp1026" />
+									<tr:selectItem label="Cp1047" value="Cp1047" />
+									<tr:selectItem label="Cp273" value="Cp273" />
+									<tr:selectItem label="Cp277" value="Cp277" />
+									<tr:selectItem label="Cp278" value="Cp278" />
+									<tr:selectItem label="Cp280" value="Cp280" />
+									<tr:selectItem label="Cp284" value="Cp284" />
+									<tr:selectItem label="Cp285" value="Cp285" />
+									<tr:selectItem label="Cp297" value="Cp297" />
+									<tr:selectItem label="Cp420" value="Cp420" />
+									<tr:selectItem label="Cp424" value="Cp424" />
+									<tr:selectItem label="Cp437" value="Cp437" />
+									<tr:selectItem label="Cp500" value="Cp500" />
+									<tr:selectItem label="Cp775" value="Cp775" />
+									<tr:selectItem label="Cp850" value="Cp850" />
+									<tr:selectItem label="Cp852" value="Cp852" />
+									<tr:selectItem label="Cp855" value="Cp855" />
+									<tr:selectItem label="Cp857" value="Cp857" />
+									<tr:selectItem label="Cp860" value="Cp860" />
+									<tr:selectItem label="Cp861" value="Cp861" />
+									<tr:selectItem label="Cp862" value="Cp862" />
+									<tr:selectItem label="Cp863" value="Cp863" />
+									<tr:selectItem label="Cp864" value="Cp864" />
+									<tr:selectItem label="Cp865" value="Cp865" />
+									<tr:selectItem label="Cp866" value="Cp866" />
+									<tr:selectItem label="Cp868" value="Cp868" />
+									<tr:selectItem label="Cp869" value="Cp869" />
+									<tr:selectItem label="Cp870" value="Cp870" />
+									<tr:selectItem label="Cp871" value="Cp871" />
+									<tr:selectItem label="Cp918" value="Cp918" />
+									<tr:selectItem label="ISO2022CN" value="ISO2022CN" />
+									<tr:selectItem label="ISO2022JP" value="ISO2022JP" />
+									<tr:selectItem label="ISO2022KR" value="ISO2022KR" />
+									<tr:selectItem label="ISO8859_3" value="ISO8859_3" />
+									<tr:selectItem label="ISO8859_6" value="ISO8859_6" />
+									<tr:selectItem label="ISO8859_8" value="ISO8859_8" />
+									<tr:selectItem label="SJIS" value="SJIS" />
+									<tr:selectItem label="TIS620" value="TIS620" />
+									<tr:selectItem label="Cp1255" value="Cp1255" />
+									<tr:selectItem label="Cp1256" value="Cp1256" />
+									<tr:selectItem label="Cp1258" value="Cp1258" />
+									<tr:selectItem label="MS932" value="MS932" />
+									<tr:selectItem label="Big5_Solaris" value="Big5_Solaris" />
+									<tr:selectItem label="EUC_JP_LINUX" value="EUC_JP_LINUX" />
+									<tr:selectItem label="EUC_TW" value="EUC_TW" />
+									<tr:selectItem label="EUC_JP_Solaris" value="EUC_JP_Solaris" />
+									<tr:selectItem label="Cp1006" value="Cp1006" />
+									<tr:selectItem label="Cp1025" value="Cp1025" />
+									<tr:selectItem label="Cp1046" value="Cp1046" />
+									<tr:selectItem label="Cp1097" value="Cp1097" />
+									<tr:selectItem label="Cp1098" value="Cp1098" />
+									<tr:selectItem label="Cp1112" value="Cp1112" />
+									<tr:selectItem label="Cp1122" value="Cp1122" />
+									<tr:selectItem label="Cp1123" value="Cp1123" />
+									<tr:selectItem label="Cp1124" value="Cp1124" />
+									<tr:selectItem label="Cp1381" value="Cp1381" />
+									<tr:selectItem label="Cp1383" value="Cp1383" />
+									<tr:selectItem label="Cp33722" value="Cp33722" />
+									<tr:selectItem label="Cp737" value="Cp737" />
+									<tr:selectItem label="Cp856" value="Cp856" />
+									<tr:selectItem label="Cp874" value="Cp874" />
+									<tr:selectItem label="Cp875" value="Cp875" />
+									<tr:selectItem label="Cp921" value="Cp921" />
+									<tr:selectItem label="Cp922" value="Cp922" />
+									<tr:selectItem label="Cp930" value="Cp930" />
+									<tr:selectItem label="Cp933" value="Cp933" />
+									<tr:selectItem label="Cp935" value="Cp935" />
+									<tr:selectItem label="Cp937" value="Cp937" />
+									<tr:selectItem label="Cp939" value="Cp939" />
+									<tr:selectItem label="Cp942" value="Cp942" />
+									<tr:selectItem label="Cp942C" value="Cp942C" />
+									<tr:selectItem label="Cp943" value="Cp943" />
+									<tr:selectItem label="Cp943C" value="Cp943C" />
+									<tr:selectItem label="Cp948" value="Cp948" />
+									<tr:selectItem label="Cp949" value="Cp949" />
+									<tr:selectItem label="Cp949C" value="Cp949C" />
+									<tr:selectItem label="Cp950" value="Cp950" />
+									<tr:selectItem label="Cp964" value="Cp964" />
+									<tr:selectItem label="Cp970" value="Cp970" />
+									<tr:selectItem label="ISCII91" value="ISCII91" />
+									<tr:selectItem label="ISO2022_CN_CNS" value="ISO2022_CN_CNS" />
+									<tr:selectItem label="ISO2022_CN_GB" value="ISO2022_CN_GB" />
+									<tr:selectItem label="x-iso-8859-11" value="x-iso-8859-11" />
+									<tr:selectItem label="JISAutoDetect" value="JISAutoDetect" />
+									<tr:selectItem label="x-Johab" value="x-Johab" />
+									<tr:selectItem label="MacArabic" value="MacArabic" />
+									<tr:selectItem label="MacCentralEurope"
+										value="MacCentralEurope" />
+									<tr:selectItem label="MacCroatian" value="MacCroatian" />
+									<tr:selectItem label="MacCyrillic" value="MacCyrillic" />
+									<tr:selectItem label="MacDingbat" value="MacDingbat" />
+									<tr:selectItem label="MacGreek" value="MacGreek" />
+									<tr:selectItem label="MacHebrew" value="MacHebrew" />
+									<tr:selectItem label="MacIceland" value="MacIceland" />
+									<tr:selectItem label="MacRoman" value="MacRoman" />
+									<tr:selectItem label="MacRomania" value="MacRomania" />
+									<tr:selectItem label="MacSymbol" value="MacSymbol" />
+									<tr:selectItem label="MacThai" value="MacThai" />
+									<tr:selectItem label="MacTurkish" value="MacTurkish" />
+									<tr:selectItem label="MacUkraine" value="MacUkraine" />
+									<tr:selectItem label="MS950_HKSCS" value="MS950_HKSCS" />
+									<tr:selectItem label="MS936" value="MS936" />
+									<tr:selectItem label="PCK" value="PCK" />
+									<tr:selectItem label="MS874" value="MS874" />
+									<tr:selectItem label="MS949" value="MS949" />
+									<tr:selectItem label="MS950" value="MS950" />
+									<f:facet name="help">
+										<tr:outputText value="#{msg['green.index.doc.encode.help']}" />
+									</f:facet>
+								</tr:selectOneChoice>
+							</tr:panelHeader>
+							<tr:spacer height="30" />
+							<tr:commandButton text="#{msg['green.index.doc.button.save']}"
+								action="#{conf.saveInfo}" />
+							<tr:commandButton text="#{msg['green.index.doc.button.start']}"
+								action="#{conf.startCrowl}" />
+						</tr:panelHeader>
+					</tr:panelGroupLayout>
+					<f:facet name="appCopyright">
+						<tr:outputText value="2008 Green Search" />
+					</f:facet>
+				</tr:panelPage>
+			</tr:form>
+		</tr:document>
+	</f:view>
+</jsp:root>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:trh="http://myfaces.apache.org/trinidad/html"
+	xmlns:tr="http://myfaces.apache.org/trinidad">
+	<jsp:directive.page language="java"
+		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
+	<f:view>
+		<tr:document title="Download">
+			<tr:form defaultCommand="downloadBtn">
+				<tr:panelGroupLayout layout="horizontal">
+					<tr:outputLabel value="Green Search"
+						inlineStyle="font-size: xx-large; color: green" />
+				</tr:panelGroupLayout>
+				<tr:panelPage>
+
+					<tr:panelGroupLayout layout="horizontal">
+						<tr:commandButton id="back" text="戻る" action="result" />
+						<tr:commandButton id="downloadBtn" text="ダウンロード">
+						</tr:commandButton>
+					</tr:panelGroupLayout>
+				</tr:panelPage>
+			</tr:form>
+		</tr:document>
+	</f:view>
+</jsp:root>

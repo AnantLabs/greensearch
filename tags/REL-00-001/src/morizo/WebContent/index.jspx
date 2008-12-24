@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:tr="http://myfaces.apache.org/trinidad">
+	<jsp:directive.page language="java"
+		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
+	<f:view>
+		<f:loadBundle basename="green.message" var="msg" />
+		<tr:document title="Search Top">
+			<tr:form defaultCommand="searchBtn">
+				<tr:panelGroupLayout layout="horizontal">
+					<tr:outputLabel value="Green Search"
+						inlineStyle="font-size: xx-large; color: green" />
+				</tr:panelGroupLayout>
+				<tr:panelPage>
+					<tr:panelBorderLayout>
+						<tr:messages />
+						<f:facet name="top">
+							<f:verbatim>
+								<table width="100%">
+									<tr>
+										<td height="30pt" align="center"
+											style="background-color: white"></td>
+									</tr>
+								</table>
+							</f:verbatim>
+						</f:facet>
+						<f:facet name="left">
+							<f:verbatim>
+								<table width="300">
+									<tr>
+										<td height="100pt" align="center"
+											style="background-color: white;"></td>
+									</tr>
+								</table>
+							</f:verbatim>
+						</f:facet>
+						<f:facet name="right">
+							<f:verbatim>
+								<table width="300">
+									<tr>
+										<td height="100pt" align="center"
+											style="background-color: white;"></td>
+									</tr>
+								</table>
+							</f:verbatim>
+						</f:facet>
+						<f:facet name="bottom">
+							<f:verbatim>
+								<table width="100%">
+									<tr>
+										<td height="30pt" align="center"
+											style="background-color: white;"></td>
+									</tr>
+								</table>
+							</f:verbatim>
+						</f:facet>
+						<f:verbatim>
+							<tr:panelGroupLayout layout="horizontal">
+								<tr:inputText label="Search:" value="#{searchBean.query}" />
+								<tr:commandButton id="searchBtn" text="#{msg['green.index.searchBtn']}"
+									action="#{searchBean.search}" />
+							</tr:panelGroupLayout>
+						</f:verbatim>
+					</tr:panelBorderLayout>
+				</tr:panelPage>
+			</tr:form>
+			<tr:outputText value="2008 Green Search" />
+		</tr:document>
+	</f:view>
+</jsp:root>

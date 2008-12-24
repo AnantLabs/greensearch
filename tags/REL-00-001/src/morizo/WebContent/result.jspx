@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:trh="http://myfaces.apache.org/trinidad/html"
+	xmlns:tr="http://myfaces.apache.org/trinidad">
+	<jsp:directive.page language="java"
+		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
+	<f:view>
+		<f:loadBundle basename="green.message" var="msg" />
+		<tr:document title="Search Top">
+			<tr:form defaultCommand="searchBtn">
+				<tr:panelGroupLayout layout="horizontal">
+					<tr:outputLabel value="Green Search"
+						inlineStyle="font-size: xx-large; color: green" />
+					<tr:panelGroupLayout layout="vertical">
+						<tr:panelGroupLayout layout="horizontal">
+							<tr:inputText label="Search:" value="#{searchBean.query}" />
+							<tr:commandButton id="searchBtn"
+								text="#{msg['green.result.searchBtn']}"
+								action="#{searchBean.search}" />
+						</tr:panelGroupLayout>
+						<tr:panelGroupLayout layout="horizontal">
+							<tr:spacer width="50" height="0" />
+							<tr:selectOneRadio label="#{msg['green.result.sortRadio']}"
+								value="#{searchBean.sort}" layout="horizontal">
+								<tr:selectItem
+									label="#{msg['green.result.sortRadio.item.filename']}"
+									value="title" />
+								<tr:selectItem
+									label="#{msg['green.result.sortRadio.item.concept']}"
+									value="lsa" />
+								<tr:selectItem
+									label="#{msg['green.result.sortRadio.item.date']}" value="date" />
+							</tr:selectOneRadio>
+						</tr:panelGroupLayout>
+					</tr:panelGroupLayout>
+				</tr:panelGroupLayout>
+				<tr:panelPage>
+					<tr:panelBorderLayout>
+						<tr:messages />
+						<f:facet name="top">
+							<f:verbatim>
+								<table width="100%">
+									<tr>
+										<td height="30pt" align="center"
+											style="background-color: white"></td>
+									</tr>
+								</table>
+							</f:verbatim>
+						</f:facet>
+						<f:facet name="left">
+							<f:verbatim>
+								<table width="100%">
+									<tr>
+										<td height="100pt" align="center"
+											style="background-color: white;"></td>
+									</tr>
+								</table>
+							</f:verbatim>
+						</f:facet>
+						<f:facet name="right">
+							<f:verbatim>
+								<table width="100%">
+									<tr>
+										<td height="100pt" align="center"
+											style="background-color: white;"></td>
+									</tr>
+								</table>
+							</f:verbatim>
+						</f:facet>
+						<f:facet name="bottom">
+							<f:verbatim>
+								<table width="100%">
+									<tr>
+										<td height="30pt" align="center"
+											style="background-color: white;"></td>
+									</tr>
+								</table>
+							</f:verbatim>
+						</f:facet>
+						<f:verbatim>
+							<!-- tr:statusIndicator / -->
+							<tr:panelGroupLayout layout="vertical">
+								<tr:table allDetailsEnabled="true" var="row" rows="10"
+									width="100%" summary="Search Result"
+									value="#{searchBean.result}">
+									<f:facet name="actions">
+										<tr:outputText value="#{msg['green.result.title']}"
+											inlineStyle="white-space: nowrap;" />
+									</f:facet>
+									<tr:column headerText="title">
+										<tr:commandLink text="#{row.title}" partialSubmit="false">
+											<tr:fileDownloadActionListener
+												contentType="application/octet-stream"
+												filename="#{row.fileName}" method="#{row.sendDocument}" />
+										</tr:commandLink>
+										<!-- tr:commandLink text="#{row.title}" action="dialog:download"
+											useWindow="true" windowWidth="250" windowHeight="250"
+											returnListener="#{row.retuenLsn}" / -->
+										<tr:outputText value="#{row.id}" />
+										<tr:outputText value="#{row.docDate}" />
+									</tr:column>
+									<f:facet name="detailStamp">
+										<tr:outputDocument value="#{row.shortContent}" />
+									</f:facet>
+								</tr:table>
+							</tr:panelGroupLayout>
+						</f:verbatim>
+					</tr:panelBorderLayout>
+				</tr:panelPage>
+			</tr:form>
+		</tr:document>
+	</f:view>
+</jsp:root>

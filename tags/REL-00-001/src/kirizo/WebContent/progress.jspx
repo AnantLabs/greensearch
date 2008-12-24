@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:trh="http://myfaces.apache.org/trinidad/html"
+	xmlns:tr="http://myfaces.apache.org/trinidad">
+	<jsp:directive.page language="java"
+		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
+	<f:view>
+		<f:loadBundle basename="green.message" var="msg" />
+		<tr:document title="#{msg['green.progress.title']}">
+			<tr:form>
+				<tr:panelPage>
+					<f:facet name="branding">
+						<tr:outputLabel value="Green Search"
+							inlineStyle="font-size: xx-large; color: green" />
+					</f:facet>
+					<f:facet name="navigationGlobal">
+						<tr:navigationPane hint="buttons">
+							<tr:commandNavigationItem text="#{msg['green.index.help']}"
+								action="index" selected="true" />
+						</tr:navigationPane>
+					</f:facet>
+					<f:facet name="navigation1">
+						<tr:navigationPane hint="tab">
+							<tr:commandNavigationItem
+								text="#{msg['green.index.basesetting']}" action="index" />
+							<tr:commandNavigationItem text="#{msg['green.index.prosess']}"
+								action="progressStart" selected="true" />
+							<tr:commandNavigationItem text="#{msg['green.index.report']}"
+								action="report" />
+						</tr:navigationPane>
+					</f:facet>
+					<f:facet name="navigation2">
+						<tr:navigationPane hint="bar">
+							<tr:commandNavigationItem text="#{msg['green.index.prosess']}"
+								action="index" selected="true" />
+						</tr:navigationPane>
+					</f:facet>
+					<f:facet name="navigation3">
+						<tr:navigationPane hint="list">
+							<tr:commandNavigationItem
+								text="#{msg['green.index.basesetting']}" action="index" />
+							<tr:commandNavigationItem text="#{msg['green.index.prosess']}"
+								action="progressStart" selected="true" />
+							<tr:commandNavigationItem text="#{msg['green.index.report']}"
+								action="report" />
+						</tr:navigationPane>
+					</f:facet>
+					<tr:panelHeader text="#{msg['green.progress.crawl.title']}">
+						<tr:outputText value="#{msg['green.progress.crawl.description']}" />
+						<tr:messages />
+						<tr:poll interval="2000" id="pollid" />
+						<tr:panelCaptionGroup
+							captionText="#{msg['green.progress.crawl.label']}">
+							<tr:panelGroupLayout layout="horizontal">
+								<tr:spacer width="30" />
+								<tr:panelGroupLayout layout="vertical" partialTriggers="pollid"
+									id="pg1">
+
+									<!-- File system indexing -->
+									<tr:panelGroupLayout layout="horizontal">
+										<tr:spacer width="13"
+											rendered="#{0 > conf.progressModels.jobid}" />
+										<tr:image source="/images/processCheck.gif"
+											rendered="#{conf.progressModels.jobid >= 0}" />
+										<tr:spacer width="5" />
+										<tr:outputText
+											value="#{msg['green.progress.crawl.nowindexing']}"
+											styleClass="AFFieldText" />
+										<tr:progressIndicator id="progressid" partialTriggers="pollid"
+											value="#{conf.progressModels.boundedRangeModels[0]}">
+											<tr:outputFormatted styleUsage="instruction"
+												value="#{msg['green.progress.crawl.wating']}"
+												rendered="#{conf.progressModels.boundedRangeModels[0].value == -1 or conf.progressModels.boundedRangeModels[0].value == -1}" />
+											<tr:outputFormatted styleUsage="instruction"
+												value="#{conf.progressModels.boundedRangeModels[0].value} / #{conf.progressModels.boundedRangeModels[0].maximum} #{msg['green.progress.crawl.indexd']}"
+												rendered="#{conf.progressModels.boundedRangeModels[0].value > -1 and conf.progressModels.boundedRangeModels[0].value > -1}" />
+										</tr:progressIndicator>
+									</tr:panelGroupLayout>
+
+									<!-- Vector analysis -->
+									<tr:panelGroupLayout layout="horizontal">
+										<tr:spacer width="13"
+											rendered="#{1 > test.progressModels.jobid}" />
+										<tr:image source="/images/processCheck.gif"
+											rendered="#{conf.progressModels.jobid >= 1}" />
+										<tr:spacer width="5" />
+										<tr:outputText value="#{msg['green.progress.crawl.anaraiz']}"
+											styleClass="AFFieldText" />
+										<tr:progressIndicator id="progressid" partialTriggers="pollid"
+											action="progressEnd"
+											value="#{conf.progressModels.boundedRangeModels[1]}">
+											<tr:outputFormatted styleUsage="instruction"
+												value="#{msg['green.progress.crawl.wating']}"
+												rendered="#{conf.progressModels.boundedRangeModels[1].value == -1 or conf.progressModels.boundedRangeModels[1].value == -1}" />
+											<tr:outputFormatted styleUsage="instruction"
+												value="#{conf.progressModels.boundedRangeModels[1].value} / #{conf.progressModels.boundedRangeModels[1].maximum} #{msg['green.progress.crawl.anaraized']}"
+												rendered="#{conf.progressModels.boundedRangeModels[1].value > -1 and conf.progressModels.boundedRangeModels[1].value > -1}" />
+										</tr:progressIndicator>
+									</tr:panelGroupLayout>
+								</tr:panelGroupLayout>
+							</tr:panelGroupLayout>
+						</tr:panelCaptionGroup>
+					</tr:panelHeader>
+					<f:facet name="appCopyright">
+						<tr:outputText value="2008 Green Search" />
+					</f:facet>
+				</tr:panelPage>
+			</tr:form>
+		</tr:document>
+	</f:view>
+</jsp:root>
