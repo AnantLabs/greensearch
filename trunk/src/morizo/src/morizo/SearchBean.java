@@ -98,6 +98,11 @@ public class SearchBean implements Serializable {
 				stbf.append(":");
 				stbf.append(sts);
 				stbf.append(" ");
+			} else {
+				stbf.append("+" + CAT);
+				stbf.append(":");
+				stbf.append(sts);
+				stbf.append(" ");
 			}
 		}
 
@@ -132,13 +137,13 @@ public class SearchBean implements Serializable {
 			System.out.println("### query = " + queryString);
 			SolrQuery query = new SolrQuery();
 			query.setQuery(parseQuery(queryString));
-			query.setRows(500);
+			query.setRows(200);
 			query.setHighlight(true);
 			query.addHighlightField(CAT);
 			query.setHighlightFragsize(200);
 
 			if (sort.equals(SORT_DATE)) {
-				query.setSortField("document_dt", ORDER.desc);
+				query.setSortField("documentdt", ORDER.desc);
 			}
 			if (this.server == null) {
 				initSolrClient();
@@ -154,7 +159,7 @@ public class SearchBean implements Serializable {
 				SolrDocument sd = (SolrDocument) obj;
 				String id = (String) sd.getFieldValue("id");
 				String title = (String) sd.getFieldValue("title");
-				Date date = (Date) sd.getFieldValue("document_dt");
+				Date date = (Date) sd.getFieldValue("documentdt");
 
 				Map<String, List<String>> m = hmap.get(id);
 				List<String> l = m.get("content");
