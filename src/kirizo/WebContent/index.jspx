@@ -8,7 +8,7 @@
 		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
 	<f:view>
 		<f:loadBundle basename="green.message" var="msg" />
-		<tr:document title="ファイルシステムクローラ設定">
+		<tr:document title="#{msg['green.index.title']}">
 			<tr:form>
 				<tr:panelPage>
 					<f:facet name="branding">
@@ -24,9 +24,10 @@
 					<f:facet name="navigation1">
 						<tr:navigationPane hint="tab">
 							<tr:commandNavigationItem
-								text="#{msg['green.index.basicsetting']}" action="index"
+								text="#{msg['green.index.basesetting']}" action="index"
 								selected="true" />
-							<tr:commandNavigationItem text="プロセス" action="progressStart" />
+							<tr:commandNavigationItem text="#{msg['green.index.prosess']}"
+								action="progressStart" />
 							<tr:commandNavigationItem text="#{msg['green.index.report']}"
 								action="report" />
 						</tr:navigationPane>
@@ -34,59 +35,76 @@
 					<f:facet name="navigation2">
 						<tr:navigationPane hint="bar">
 							<tr:commandNavigationItem
-								text="#{msg['green.index.basicsetting']}" action="index"
+								text="#{msg['green.index.basesetting']}" action="index"
 								selected="true" />
 						</tr:navigationPane>
 					</f:facet>
 					<f:facet name="navigation3">
 						<tr:navigationPane hint="list">
 							<tr:commandNavigationItem
-								text="#{msg['green.index.basicsetting']}" action="index"
+								text="#{msg['green.index.basesetting']}" action="index"
 								selected="true" />
-							<tr:commandNavigationItem text="プロセス" action="progressStart" />
+							<tr:commandNavigationItem text="#{msg['green.index.prosess']}"
+								action="progressStart" />
 							<tr:commandNavigationItem text="#{msg['green.index.report']}"
 								action="report" />
 						</tr:navigationPane>
 					</f:facet>
 					<tr:messages />
 					<tr:panelGroupLayout layout="vertical">
-						<tr:panelHeader text="ファイルシステムクローラ設定">
-							<tr:outputText value="ファイルシステムクーローラに関する設定を行います。" />
-							<tr:panelHeader text="検索サーバーURL設定">
-								<tr:inputText label="検索サーバーURL" id="solrUrl"
-									value="#{conf.solrUrl}" columns="30" required="true">
+						<tr:panelHeader text="#{msg['green.index.doc.title']}">
+							<tr:outputText value="#{msg['green.index.doc.description']}" />
+							<tr:panelHeader text="#{msg['green.index.doc.url.title']}">
+								<tr:inputText label="#{msg['green.index.doc.url.label']}"
+									id="solrUrl" value="#{conf.solrUrl}" columns="30"
+									required="true">
 									<f:facet name="help">
-										<tr:outputText value="検索サーバーのURLを指定してください。" />
+										<tr:outputText value="#{msg['green.index.doc.url.help']}" />
 									</f:facet>
 								</tr:inputText>
 							</tr:panelHeader>
-							<tr:panelHeader text="ディレクトリ設定">
-								<tr:inputText label="クロールディレクトリ" id="directoryStr"
-									value="#{conf.directoryStr}" columns="100" required="true">
+							<tr:panelHeader text="#{msg['green.index.doc.directory.title']}">
+								<tr:inputText label="#{msg['green.index.doc.directory.label']}"
+									id="directoryStr" value="#{conf.directoryStr}" columns="100"
+									required="true">
 									<f:facet name="help">
-										<tr:outputText value="クローリングをスタートするディレクトリを入力してください。" />
+										<tr:outputText
+											value="#{msg['green.index.doc.directory.help']}" />
 									</f:facet>
 								</tr:inputText>
 							</tr:panelHeader>
-							<tr:panelHeader text="定期実行設定" id="execstatus">
-								<tr:selectOneChoice label="定期実行設定" value="#{conf.execstatus}">
-									<tr:selectItem label="日次" value="day" />
-									<tr:selectItem label="週次" value="week" />
+							<tr:panelHeader text="#{msg['green.index.doc.execution.title']}"
+								id="execstatus">
+								<tr:selectOneChoice
+									label="#{msg['green.index.doc.execution.label']}"
+									value="#{conf.execstatus}">
+									<tr:selectItem
+										label="#{msg['green.index.doc.execution.item.day']}"
+										value="day" />
+									<tr:selectItem
+										label="#{msg['green.index.doc.execution.item.week']}"
+										value="week" />
 									<f:facet name="help">
-										<tr:outputText value="週時の場合は、日曜日の0:00 分に実行されます。" />
+										<tr:outputText
+											value="#{msg['green.index.doc.execution.help']}" />
 									</f:facet>
 								</tr:selectOneChoice>
 							</tr:panelHeader>
-							<tr:panelHeader text="意味解析設定">
+							<tr:panelHeader text="#{msg['green.index.doc.anaraiz.title']}">
 								<tr:selectBooleanCheckbox id="optimaze"
-									label="インデックスの後に意味解析を行うかどうか" value="#{conf.optimaze}" />
+									label="#{msg['green.index.doc.anaraiz.label']}"
+									value="#{conf.optimaze}" />
 							</tr:panelHeader>
-							<tr:panelHeader text="リポジトリ設定">
+							<tr:panelHeader text="#{msg['green.index.doc.repository.title']}">
 								<tr:selectBooleanCheckbox id="delete"
-									label="リポジトリの内容を削除してからインデックスする" value="#{conf.delete}" />
+									label="#{msg['green.index.doc.repository.label']}"
+									value="#{conf.delete}" />
 							</tr:panelHeader>
-							<tr:panelHeader text="文字エンコード設定" id="encoding">
-								<tr:selectOneChoice label="文字エンコード" value="#{conf.encoding}">
+							<tr:panelHeader text="#{msg['green.index.doc.encode.title']}"
+								id="encoding">
+								<tr:selectOneChoice
+									label="#{msg['green.index.doc.encode.label']}"
+									value="#{conf.encoding}">
 									<tr:selectItem label="ISO8859_1" value="ISO8859_1" />
 									<tr:selectItem label="ISO8859_2" value="ISO8859_2" />
 									<tr:selectItem label="ISO8859_4" value="ISO8859_4" />
@@ -236,13 +254,15 @@
 									<tr:selectItem label="MS949" value="MS949" />
 									<tr:selectItem label="MS950" value="MS950" />
 									<f:facet name="help">
-										<tr:outputText value="インデックスする文章の文字エンコードを選択します。" />
+										<tr:outputText value="#{msg['green.index.doc.encode.help']}" />
 									</f:facet>
 								</tr:selectOneChoice>
 							</tr:panelHeader>
 							<tr:spacer height="30" />
-							<tr:commandButton text="保存" action="#{conf.saveInfo}" />
-							<tr:commandButton text="クローラ実行" action="#{conf.startCrowl}" />
+							<tr:commandButton text="#{msg['green.index.doc.button.save']}"
+								action="#{conf.saveInfo}" />
+							<tr:commandButton text="#{msg['green.index.doc.button.start']}"
+								action="#{conf.startCrowl}" />
 						</tr:panelHeader>
 					</tr:panelGroupLayout>
 					<f:facet name="appCopyright">

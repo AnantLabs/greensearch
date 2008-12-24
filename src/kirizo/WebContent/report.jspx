@@ -7,7 +7,8 @@
 	<jsp:directive.page language="java"
 		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
 	<f:view>
-		<tr:document title="ファイルシステムクローラ設定">
+		<f:loadBundle basename="green.message" var="msg" />
+		<tr:document title="#{msg['green.progress.title']}">
 			<tr:form>
 				<tr:panelPage>
 					<f:facet name="branding">
@@ -16,43 +17,47 @@
 					</f:facet>
 					<f:facet name="navigationGlobal">
 						<tr:navigationPane hint="buttons">
-							<tr:commandNavigationItem text="ヘルプ" action="index"
-								selected="true" />
+							<tr:commandNavigationItem text="#{msg['green.index.help']}"
+								action="index" selected="true" />
 						</tr:navigationPane>
 					</f:facet>
 					<f:facet name="navigation1">
 						<tr:navigationPane hint="tab">
-							<tr:commandNavigationItem text="基本設定" action="index" />
-							<tr:commandNavigationItem text="プロセス" action="progressStart" />
-							<tr:commandNavigationItem text="レポート" action="report"
-								selected="true" />
+							<tr:commandNavigationItem
+								text="#{msg['green.index.basesetting']}" action="index" />
+							<tr:commandNavigationItem text="#{msg['green.index.prosess']}"
+								action="progressStart" />
+							<tr:commandNavigationItem text="#{msg['green.index.report']}"
+								action="report" selected="true" />
 						</tr:navigationPane>
 					</f:facet>
 					<f:facet name="navigation2">
 						<tr:navigationPane hint="bar">
-							<tr:commandNavigationItem text="レポート" action="report"
-								selected="true" />
+							<tr:commandNavigationItem text="#{msg['green.index.report']}"
+								action="report" selected="true" />
 						</tr:navigationPane>
 					</f:facet>
 					<f:facet name="navigation3">
 						<tr:navigationPane hint="list">
-							<tr:commandNavigationItem text="基本設定" action="index" />
-							<tr:commandNavigationItem text="プロセス" action="progressStart" />
-							<tr:commandNavigationItem text="レポート" action="report"
-								selected="true" />
+							<tr:commandNavigationItem
+								text="#{msg['green.index.basesetting']}" action="index" />
+							<tr:commandNavigationItem text="#{msg['green.index.prosess']}"
+								action="progressStart" />
+							<tr:commandNavigationItem text="#{msg['green.index.report']}"
+								action="report" selected="true" />
 						</tr:navigationPane>
 					</f:facet>
 					<tr:messages />
 					<tr:panelGroupLayout layout="vertical">
-						<tr:panelHeader text="クローリングレポート">
-							<tr:outputText value="クローラーがアクセスしたページ数とインデックスに要した時間をレポートします。" />
+						<tr:panelHeader text="#{msg['green.report.title']}">
+							<tr:outputText value="#{msg['green.report.description']}" />
 							<tr:panelGroupLayout layout="horizontal">
-								<tr:panelHeader text="アクセスしたページ数">
+								<tr:panelHeader text="#{msg['green.report.page']}">
 									<tr:chart id="accessFileChart" type="verticalBar"
 										inlineStyle="width:300px; height:200px;"
 										value="#{chart.pageValue}" />
 								</tr:panelHeader>
-								<tr:panelHeader text="クローリングを終えるのに要した時間">
+								<tr:panelHeader text="#{msg['green.report.time']}">
 									<tr:chart id="accessTimeChart"
 										inlineStyle="width:300px; height:200px;"
 										value="#{chart.timeValue}" />
