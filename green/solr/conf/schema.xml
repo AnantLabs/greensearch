@@ -312,7 +312,7 @@
 
 	<field name="title" type="jcontent" indexed="true" stored="true" multiValued="false"/>
 	<field name="content" type="jcontent" indexed="true" stored="true" multiValued="false"/>
-	<field name="document_dt" type="date" indexed="true" stored="true" multiValued="false"/>
+	<field name="documentdt" type="date" indexed="true" stored="true" multiValued="false"/>
 
    <!-- Dynamic field definitions.  If a field name is not found, dynamicFields
         will be used if the name matches any of the patterns.
