@@ -7,7 +7,8 @@
 	<jsp:directive.page language="java"
 		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
 	<f:view>
-		<tr:document title="ファイルシステムクローラ設定">
+		<f:loadBundle basename="green.message" var="msg" />
+		<tr:document title="#{msg['green.index.title']}">
 			<tr:form>
 				<tr:panelPage>
 					<f:facet name="branding">
@@ -16,35 +17,39 @@
 					</f:facet>
 					<f:facet name="navigationGlobal">
 						<tr:navigationPane hint="buttons">
-							<tr:commandNavigationItem text="ヘルプ" action="index"
-								selected="true" />
+							<tr:commandNavigationItem text="#{msg['green.index.help']}"
+								action="index" selected="true" />
 						</tr:navigationPane>
 					</f:facet>
 					<f:facet name="navigation1">
 						<tr:navigationPane hint="tab">
-							<tr:commandNavigationItem text="基本設定" action="index" />
-							<tr:commandNavigationItem text="プロセス" action="progressStart"
-								selected="true" />
-							<tr:commandNavigationItem text="レポート" action="report" />
+							<tr:commandNavigationItem
+								text="#{msg['green.index.basesetting']}" action="index" />
+							<tr:commandNavigationItem text="#{msg['green.index.prosess']}"
+								action="progressStart" selected="true" />
+							<tr:commandNavigationItem text="#{msg['green.index.report']}"
+								action="report" />
 						</tr:navigationPane>
 					</f:facet>
 					<f:facet name="navigation2">
 						<tr:navigationPane hint="bar">
-							<tr:commandNavigationItem text="プロセス" action="report"
-								selected="true" />
+							<tr:commandNavigationItem text="#{msg['green.index.prosess']}"
+								action="report" selected="true" />
 						</tr:navigationPane>
 					</f:facet>
 					<f:facet name="navigation3">
 						<tr:navigationPane hint="list">
-							<tr:commandNavigationItem text="基本設定" action="index" />
-							<tr:commandNavigationItem text="プロセス" action="progressStart"
-								selected="true" />
-							<tr:commandNavigationItem text="レポート" action="report" />
+							<tr:commandNavigationItem
+								text="#{msg['green.index.basesetting']}" action="index" />
+							<tr:commandNavigationItem text="#{msg['green.index.prosess']}"
+								action="progressStart" selected="true" />
+							<tr:commandNavigationItem text="#{msg['green.index.report']}"
+								action="report" />
 						</tr:navigationPane>
 					</f:facet>
-					<tr:panelHeader text="完了">
-						<tr:outputText value="全てのプロセスが正常に終了しました。" />
-						<tr:goLink destination="/" text="戻る" />
+					<tr:panelHeader text="#{msg['green.progressEnd.title']}">
+						<tr:outputText value="#{msg['green.progressEnd.description']}" />
+						<tr:goLink destination="/" text="#{msg['green.progressEnd.back']}" />
 					</tr:panelHeader>
 				</tr:panelPage>
 			</tr:form>
