@@ -112,12 +112,18 @@ public class BigDiagMatrix implements RealMatrix, Serializable {
 		CCSMatrix crsm = new CCSMatrix(nCols, nRows, nNum);
 		// double[][] outData = ri.getDataRef();
 		double sum = 0;
-		crsm.next();
+		// crsm.next();
 		for (int col = 0; col < nCols; col++) {
 			for (int row = 0; row < nRows; row++) {
 				sum = 0;
 				for (int i = 0; i < nSum; i++) {
-					sum += this.getEntry(row, i) * m.getEntry(i, col);
+					double s1 = this.getEntry(row, i);
+					if (s1 == 0)
+						continue;
+					double s2 = m.getEntry(i, col);
+					if (s2 == 0)
+						continue;
+					sum += s1 * s2;
 				}
 				// outData[row][col] = sum;
 				if (sum != 0) {
@@ -126,6 +132,7 @@ public class BigDiagMatrix implements RealMatrix, Serializable {
 			}
 			crsm.next();
 		}
+		crsm.next();
 		// return ri;
 		return crsm;
 	}
