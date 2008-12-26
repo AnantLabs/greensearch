@@ -19,8 +19,8 @@ public class QueryMatrix implements RealMatrix {
 		ptr = new int[length];
 		value = new double[length];
 	}
-	
-	public void reset(){
+
+	public void reset() {
 		dimcnt = 0;
 		cnt = 0;
 	}
