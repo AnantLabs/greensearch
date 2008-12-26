@@ -118,7 +118,8 @@ public class TwoBitMatrix implements RealMatrix, Serializable {
 			}
 		}
 		out.next();
-		return out.transpose();
+		return out;
+		// return out.transpose();
 	}
 
 	public double[][] getData() {
@@ -193,6 +194,8 @@ public class TwoBitMatrix implements RealMatrix, Serializable {
 
 	public RealMatrix multiply(RealMatrix m) throws IllegalArgumentException {
 
+		System.out.println(this.getColumnDimension());
+		System.out.println(m.getRowDimension());
 		if (this.getColumnDimension() != m.getRowDimension()) {
 			throw new IllegalArgumentException(
 					"Matrices are not multiplication compatible.");
