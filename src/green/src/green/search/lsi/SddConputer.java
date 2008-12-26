@@ -6,6 +6,7 @@ import org.apache.commons.math.linear.RealMatrix;
 import org.apache.commons.math.linear.RealMatrixImpl;
 
 import green.search.lsi.matrix.BigDiagMatrix;
+import green.search.lsi.matrix.CRSMatrix;
 import green.search.lsi.matrix.SparseMatrix;
 import green.search.lsi.matrix.TwoBitMatrix;
 
@@ -1418,52 +1419,51 @@ public class SddConputer {
 	 * @param A
 	 * @param bflag
 	 */
-	public void write_sdd(Sdd A, int bflag) {
-
-		if (A == null) {
-			System.out.println("Error trying to write NULL SDD to file,");
-			return;
-		}
-
-		/* Write out components of SDD */
-		BigDiagMatrix d = write_dmatrix(A.D);
-		TwoBitMatrix Vt = write_smatrix(A.X);
-		System.out.println();
-		TwoBitMatrix Ut = write_smatrix(A.Y);
-
-		RealMatrix zvt = d.multiply(Vt);
-
-		// /
-
-		for (int i = 0; i < zvt.getColumnDimension(); i++) {
-
-			double[] dq = new double[] { 0, 0, 0, 0, 0, 1, 1, 0 };
-			// 質問ベクトル
-			RealMatrix qm = new RealMatrixImpl(dq);
-			// 上部右行列
-			RealMatrix utdq = Ut.multiply(qm);
-			// System.out.println(utdq);
-			// 上部左行列
-			RealMatrix upleft = zvt.getColumnMatrix(i);
-			// System.out.println(upleft);
-
-			RealMatrix upper = upleft.transpose().multiply(utdq);
-			// System.out.println(upper);
-
-			// ノルムの計算
-			double nrmdl = upleft.getNorm();
-			double nrmdr = qm.getNorm();
-
-			// 類頻度の計算
-
-			double sim = upper.getNorm() / (nrmdl * nrmdr);
-			System.out.println(sim);
-			// fclose(fptr);
-		}
-		return;
-
-	} /* write_sdd */
-
+	// public void write_sdd(Sdd A, int bflag) {
+	//
+	// if (A == null) {
+	// System.out.println("Error trying to write NULL SDD to file,");
+	// return;
+	// }
+	//
+	// /* Write out components of SDD */
+	// BigDiagMatrix d = write_dmatrix(A.D);
+	// TwoBitMatrix Vt = write_smatrix(A.X);
+	// System.out.println();
+	// TwoBitMatrix Ut = write_smatrix(A.Y);
+	//
+	// RealMatrix zvt = d.multiply(Vt);
+	//
+	// // /
+	//
+	// for (int i = 0; i < zvt.getColumnDimension(); i++) {
+	//
+	// double[] dq = new double[] { 0, 0, 0, 0, 0, 1, 1, 0 };
+	// // 質問ベクトル
+	// RealMatrix qm = new RealMatrixImpl(dq);
+	// // 上部右行列
+	// RealMatrix utdq = Ut.multiply(qm);
+	// // System.out.println(utdq);
+	// // 上部左行列
+	// RealMatrix upleft = zvt.getColumnMatrix(i);
+	// // System.out.println(upleft);
+	//
+	// RealMatrix upper = upleft.transpose().multiply(utdq);
+	// // System.out.println(upper);
+	//
+	// // ノルムの計算
+	// double nrmdl = upleft.getNorm();
+	// double nrmdr = qm.getNorm();
+	//
+	// // 類頻度の計算
+	//
+	// double sim = upper.getNorm() / (nrmdl * nrmdr);
+	// System.out.println(sim);
+	// // fclose(fptr);
+	// }
+	// return;
+	//
+	// } /* write_sdd */
 	/**
 	 * Writes the smatrix A to the file pointed to by fptr in text (flag=0) or
 	 * binary (bflag=1) format.
@@ -1471,15 +1471,16 @@ public class SddConputer {
 	 * @param A
 	 * @param bflag
 	 */
-	public TwoBitMatrix write_smatrix(Smatrix A) {
+	public CRSMatrix write_smatrix(Smatrix A) {
 
 		int k; /* counter */
-		TwoBitMatrix mat = new TwoBitMatrix(A.col[0].m, A.k);
+		CRSMatrix mat = new CRSMatrix(A.m, A.k);
 
 		/* Simply write each svector to the file in sequence. */
 		for (k = 0; k < A.k; k++)
 			write_svector(A.col[k], mat);
-
+		mat.next();
+		mat.freez();
 		return mat;
 
 	} /* write_smatrix */
@@ -1491,7 +1492,7 @@ public class SddConputer {
 	 * @param x
 	 * @param bflag
 	 */
-	private void write_svector(Svector x, TwoBitMatrix mat) {
+	private void write_svector(Svector x, CRSMatrix mat) {
 
 		int i; /* counter */
 		int pvalptr = 0, psgnptr = 0;
@@ -1518,14 +1519,16 @@ public class SddConputer {
 			if ((val & mask) != 0) {
 				if ((sgn & mask) != 0) {
 					// System.out.print("-1");
-					mat.addOneInv();
+					// mat.addOneInv();
+					mat.addValue(i, -1);
 				} else {
 					// System.out.print("1");
-					mat.addOne();
+					// mat.addOne();
+					mat.addValue(i, 1);
 				}
 			} else {
 				// System.out.print("0");
-				mat.addZero();
+				// mat.addZero();
 			}
 			// System.out.print("\t");
 
@@ -1547,7 +1550,6 @@ public class SddConputer {
 			// System.out.println();
 		}
 		mat.next();
-
 		return;
 
 	} /* write_svector */
@@ -1561,7 +1563,7 @@ public class SddConputer {
 	 */
 	public BigDiagMatrix write_dmatrix(Dmatrix D) {
 
-		System.out.println("## D = \n" + D.toString());
+		// System.out.println("## D = \n" + D.toString());
 		BigDiagMatrix d = new BigDiagMatrix(D.d);
 
 		return d;
