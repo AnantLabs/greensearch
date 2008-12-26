@@ -255,16 +255,6 @@ public class SVDWeight implements Weight {
 			// RealMatrix qm = null;
 			if (utdq == null) {
 				System.out.println("q = start");
-				// qm = new RealMatrixImpl(ut_k.getColumnDimension() ,1);
-				// double[][] q = qm.getDataRef();
-				// // System.out.println("q = " + q.length);
-				// for (int i = 0; i < q.length; i++) {
-				// // // if (i >= queryVec.size()) {
-				// // // q[i] = 0.0;
-				// // // } else {
-				// q[i][0] = queryVec.get(i);
-				// // // }
-				// }
 
 				// System.out.println("qm_c = " + qm.getColumnDimension());
 				// System.out.println("qm_r = " + qm.getRowDimension());
