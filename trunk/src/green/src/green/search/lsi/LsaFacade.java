@@ -3,6 +3,7 @@ package green.search.lsi;
 import green.search.lsi.SddConputer;
 import green.search.lsi.SddConputer.Sdd;
 import green.search.lsi.matrix.BigDiagMatrix;
+import green.search.lsi.matrix.CRSMatrix;
 import green.search.lsi.matrix.FileSparseMatrix;
 import green.search.lsi.matrix.SparseMatrix;
 import green.search.lsi.matrix.TwoBitMatrix;
@@ -140,10 +141,6 @@ public class LsaFacade {
 
 		sm.countColRow();
 
-		// 進捗にステップの完了を報告
-		// BoundedRangeModelHodler.get().setJobid(
-		// BoundedRangeModelHodler.get().getJobid() + 1);
-
 		return sm;
 
 	}
@@ -167,11 +164,11 @@ public class LsaFacade {
 		}
 		double log2 = Math.log(1 - Math.exp(-1 * fi / n));
 		double ridf = (log1 + log2);
-		if (ridf < 0) {
-			System.out.println(ridf + ":" + log2 + " : " + log1 + " : " + fi
-					+ " : " + ni + " : " + n + " : " + Math.exp(-1 * fi / n)
-					+ " : " + te.term().text());
-		}
+		// if (ridf < 0) {
+		// System.out.println(ridf + ":" + log2 + " : " + log1 + " : " + fi
+		// + " : " + ni + " : " + n + " : " + Math.exp(-1 * fi / n)
+		// + " : " + te.term().text());
+		// }
 		return ridf;
 	}
 
@@ -217,18 +214,16 @@ public class LsaFacade {
 		Sdd S = ssdcomp.compute_sdd(at, eterms, terms, accr, its, tol, yinit);
 
 		BigDiagMatrix d = ssdcomp.write_dmatrix(S.D);
-		TwoBitMatrix Vt = ssdcomp.write_smatrix(S.X);
-		TwoBitMatrix UT = ssdcomp.write_smatrix(S.Y);
+		// TwoBitMatrix Vt = ssdcomp.write_smatrix(S.X);
+		// TwoBitMatrix UT = ssdcomp.write_smatrix(S.Y);
+		CRSMatrix Vt = ssdcomp.write_smatrix(S.X);
+		CRSMatrix UT = ssdcomp.write_smatrix(S.Y);
 		// System.out.println("### Vt = \n" + Vt.toString());
 		this.z_vt_k = d.multiply(Vt);
 		System.out.println();
 		this.ut_k = UT;
 		// System.out.println("### Ut = \n" + ut_k.toString());
 
-		// BoundedRangeModelHodler.get().get(3).setValue(1);
-		// 進捗にステップの完了を報告
-		// BoundedRangeModelHodler.get().setJobid(
-		// BoundedRangeModelHodler.get().getJobid() + 1);
 	}
 
 	/**
