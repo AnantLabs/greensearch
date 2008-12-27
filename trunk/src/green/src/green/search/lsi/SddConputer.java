@@ -1473,14 +1473,17 @@ public class SddConputer {
 	 */
 	public CRSMatrix write_smatrix(Smatrix A) {
 
-		int k; /* counter */
-		CRSMatrix mat = new CRSMatrix(A.m, A.k);
+		int cnt = 0;
+		for (int k = 0; k < A.k; k++)
+			cnt += write_svector_value_count(A.col[k]);
+
+		CRSMatrix mat = new CRSMatrix(A.m, A.k, cnt);
 
 		/* Simply write each svector to the file in sequence. */
-		for (k = 0; k < A.k; k++)
+		for (int k = 0; k < A.k; k++)
 			write_svector(A.col[k], mat);
 		mat.next();
-		mat.freez();
+		// mat.freez();
 		return mat;
 
 	} /* write_smatrix */
@@ -1553,6 +1556,50 @@ public class SddConputer {
 		return;
 
 	} /* write_svector */
+
+	private int write_svector_value_count(Svector x) {
+
+		int valueCnt = 0;
+		int i; /* counter */
+		int pvalptr = 0, psgnptr = 0;
+		int[] valptr, sgnptr; /* local pointers */
+		int mask; /* bit mask */
+		int val, sgn; /* current val and sgn words */
+
+		valptr = x.val;
+		sgnptr = x.sgn;
+		val = valptr[pvalptr];
+		sgn = sgnptr[psgnptr];
+		mask = ONE;
+
+		/* Loop through each s-value in x. */
+		for (i = 0; i < x.m; i++) {
+
+			/* Print out the appropriate value. */
+			if ((val & mask) != 0) {
+				if ((sgn & mask) != 0) {
+					valueCnt++;
+				} else {
+					valueCnt++;
+				}
+			}
+
+			/* Update mask, val, and sgn. */
+			if (mask == MAXMASK) {
+				mask = ONE;
+				val = valptr[++pvalptr];
+				sgn = sgnptr[++psgnptr];
+			} else
+				mask <<= 1;
+
+		} /* i-loop */
+
+		if (mask != (ONE)) {
+			// fprintf(fptr, "\n");
+			// System.out.println();
+		}
+		return valueCnt;
+	}
 
 	/**
 	 * Writes D to the file pointed to by fptr in text (bflag=0) or binary
