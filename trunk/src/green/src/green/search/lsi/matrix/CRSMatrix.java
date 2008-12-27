@@ -18,35 +18,36 @@ public class CRSMatrix implements RealMatrix, Serializable {
 	private int row = 0;
 
 	private int pnum = 0;
+	private int iptr = 0;
 
-	private transient List<Integer> ptr = new ArrayList<Integer>();
-	private transient List<Integer> idx = new ArrayList<Integer>();
-	private transient List<Integer> val = new ArrayList<Integer>();
+	private int[] ptr;
+	private int[] idx;
+	private int[] val;
 
-	private int[] iptr;
-	private int[] iidx;
-	private int[] ival;
-
-	public CRSMatrix(int cols, int rows) {
+	public CRSMatrix(int cols, int rows, int vnum) {
 		col = cols;
 		row = rows;
+		ptr = new int[rows + 1];
+		idx = new int[vnum];
+		val = new int[vnum];
 	}
 
 	public void addValue(int index, int value) {
-		idx.add(index);
-		val.add(value);
+		idx[pnum] = index;
+		val[pnum] = value;
 		pnum++;
 	}
 
 	public void next() {
-		ptr.add(pnum);
+		ptr[iptr] = pnum;
+		iptr++;
 	}
 
-	public void freez() {
-		this.iptr = freez(ptr);
-		this.iidx = freez(idx);
-		this.ival = freez(val);
-	}
+	// public void freez() {
+	// this.iptr = freez(ptr);
+	// this.iidx = freez(idx);
+	// this.ival = freez(val);
+	// }
 
 	private int[] freez(List<Integer> list) {
 		int[] target = new int[list.size()];
@@ -94,11 +95,11 @@ public class CRSMatrix implements RealMatrix, Serializable {
 	@Override
 	public double getEntry(int row, int column) throws MatrixIndexException {
 
-		int col_ind_s = this.iptr[row];
-		int col_ind_e = this.iptr[row + 1];
+		int col_ind_s = this.ptr[row];
+		int col_ind_e = this.ptr[row + 1];
 		for (int i = col_ind_s; i < col_ind_e; i++) {
-			if (this.iidx[i] == column) {
-				return this.ival[i];
+			if (this.idx[i] == column) {
+				return this.val[i];
 			}
 		}
 		return 0;
