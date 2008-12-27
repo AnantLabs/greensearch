@@ -17,6 +17,8 @@ public class FileSparseMatrix implements SparseMatrix {
 	private int cols;
 	private int vals;
 
+	private String idf;
+
 	/** 行列の格納ディレクトリ */
 	File file;
 
@@ -41,6 +43,7 @@ public class FileSparseMatrix implements SparseMatrix {
 	public FileSparseMatrix(File file, String idf) throws IOException {
 		super();
 		this.file = file;
+		this.idf = idf;
 
 		this.value = new FileSparseMatrixElement(file, idf, VALUE, DOUBLE_SIZE);
 		this.ind = new FileSparseMatrixElement(file, idf, IND, INT_SIZE);
@@ -266,6 +269,13 @@ public class FileSparseMatrix implements SparseMatrix {
 		this.value.relese();
 		this.ind.relese();
 		this.ptr.relese();
+
+		File[] files = this.file.listFiles();
+		for (File file : files) {
+			if (file.getName().startsWith(this.idf)) {
+				file.delete();
+			}
+		}
 	}
 
 	public void flush() throws IOException {
