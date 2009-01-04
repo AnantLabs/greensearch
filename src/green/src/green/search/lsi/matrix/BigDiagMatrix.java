@@ -100,15 +100,16 @@ public class BigDiagMatrix implements RealMatrix, Serializable {
 		int nCols = m.getColumnDimension();
 		int nSum = this.getColumnDimension();
 		// RealMatrixImpl ri = new RealMatrixImpl(nRows, nCols);
-		int nNum = 0;
-		for (int row = 0; row < nRows; row++) {
-			for (int col = 0; col < nCols; col++) {
-				double d = m.getEntry(row, col);
-				if (d != 0) {
-					nNum++;
-				}
-			}
-		}
+		CRSMatrix crsMat = (CRSMatrix) m;
+		int nNum = crsMat.getValueNum();
+		// for (int row = 0; row < nRows; row++) {
+		// for (int col = 0; col < nCols; col++) {
+		// double d = m.getEntry(row, col);
+		// if (d != 0) {
+		// nNum++;
+		// }
+		// }
+		// }
 		CCSMatrix crsm = new CCSMatrix(nCols, nRows, nNum);
 		// double[][] outData = ri.getDataRef();
 		double sum = 0;
