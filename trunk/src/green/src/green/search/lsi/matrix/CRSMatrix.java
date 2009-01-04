@@ -43,18 +43,8 @@ public class CRSMatrix implements RealMatrix, Serializable {
 		iptr++;
 	}
 
-	// public void freez() {
-	// this.iptr = freez(ptr);
-	// this.iidx = freez(idx);
-	// this.ival = freez(val);
-	// }
-
-	private int[] freez(List<Integer> list) {
-		int[] target = new int[list.size()];
-		for (int i = 0; i < list.size(); i++) {
-			target[i] = list.get(i);
-		}
-		return target;
+	public int getValueNum() {
+		return val.length;
 	}
 
 	@Override

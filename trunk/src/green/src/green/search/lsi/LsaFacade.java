@@ -217,8 +217,9 @@ public class LsaFacade {
 		// TwoBitMatrix Vt = ssdcomp.write_smatrix(S.X);
 		// TwoBitMatrix UT = ssdcomp.write_smatrix(S.Y);
 		CRSMatrix Vt = ssdcomp.write_smatrix(S.X);
+		System.out.println("### Vt");
 		CRSMatrix UT = ssdcomp.write_smatrix(S.Y);
-		// System.out.println("### Vt = \n" + Vt.toString());
+		System.out.println("### Ut");
 		this.z_vt_k = d.multiply(Vt);
 		System.out.println();
 		this.ut_k = UT;
