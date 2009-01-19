@@ -12,11 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 public class ClientCacheFilter implements Filter {
 
-	@Override
 	public void destroy() {
 	}
 
-	@Override
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 		chain.doFilter(request, response);
@@ -26,7 +24,6 @@ public class ClientCacheFilter implements Filter {
 		res.setDateHeader("Expires", -1);
 	}
 
-	@Override
 	public void init(FilterConfig config) throws ServletException {
 	}
 
