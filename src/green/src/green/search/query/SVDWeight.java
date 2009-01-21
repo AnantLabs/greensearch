@@ -290,7 +290,8 @@ public class SVDWeight implements Weight {
 			// ƒmƒ‹ƒ€‚ÌŒvŽZ
 			if (nrmdr == -1) {
 				nrmdr = qm.getNorm();
-				System.out.println("### nrmdr = " + nrmdr);
+				System.out.println("### nrmdr : nrmdl = " + nrmdr + "\t:\t"
+						+ nrmdl);
 			}
 
 			// System.out.println("## nrmdl = " + nrmdl);
@@ -298,7 +299,8 @@ public class SVDWeight implements Weight {
 			// System.out.println("## upper.getNorm() = " + upper.getNorm());
 
 			// —Þ•p“x‚ÌŒvŽZ
-			double sim = Math.pow(10, 16) * (1 + upper.getNorm()) / (nrmdl * nrmdr);
+			double sim = Math.pow(10, 16) * (1 + upper.getNorm())
+					/ (nrmdl * nrmdr);
 
 			// if (sim != 0)
 			System.out.println("### docnm = " + docnm + "\tsim = "
