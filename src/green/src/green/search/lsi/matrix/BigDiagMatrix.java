@@ -113,7 +113,7 @@ public class BigDiagMatrix implements RealMatrix, Serializable {
 		CCSMatrix crsm = new CCSMatrix(nCols, nRows, nNum);
 		// double[][] outData = ri.getDataRef();
 		double sum = 0;
-		// crsm.next();
+		crsm.next();
 		for (int col = 0; col < nCols; col++) {
 			for (int row = 0; row < nRows; row++) {
 				sum = 0;
@@ -133,7 +133,7 @@ public class BigDiagMatrix implements RealMatrix, Serializable {
 			}
 			crsm.next();
 		}
-		crsm.next();
+		// crsm.next();
 		// return ri;
 		return crsm;
 	}
