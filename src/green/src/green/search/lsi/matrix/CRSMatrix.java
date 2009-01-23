@@ -47,42 +47,34 @@ public class CRSMatrix implements RealMatrix, Serializable {
 		return val.length;
 	}
 
-	@Override
 	public RealMatrix add(RealMatrix arg0) throws IllegalArgumentException {
 		throw new RuntimeException("Not supported method call");
 	}
 
-	@Override
 	public RealMatrix copy() {
 		throw new RuntimeException("Not supported method call");
 	}
 
-	@Override
 	public double[] getColumn(int arg0) throws MatrixIndexException {
 		throw new RuntimeException("Not supported method call");
 	}
 
-	@Override
 	public int getColumnDimension() {
 		return col;
 	}
 
-	@Override
 	public RealMatrix getColumnMatrix(int arg0) throws MatrixIndexException {
 		throw new RuntimeException("Not supported method call");
 	}
 
-	@Override
 	public double[][] getData() {
 		throw new RuntimeException("Not supported method call");
 	}
 
-	@Override
 	public double getDeterminant() {
 		throw new RuntimeException("Not supported method call");
 	}
 
-	@Override
 	public double getEntry(int row, int column) throws MatrixIndexException {
 
 		int col_ind_s = this.ptr[row];
@@ -95,59 +87,48 @@ public class CRSMatrix implements RealMatrix, Serializable {
 		return 0;
 	}
 
-	@Override
 	public double getNorm() {
 		throw new RuntimeException("Not supported method call");
 	}
 
-	@Override
 	public double[] getRow(int arg0) throws MatrixIndexException {
 		throw new RuntimeException("Not supported method call");
 	}
 
-	@Override
 	public int getRowDimension() {
 		return row;
 	}
 
-	@Override
 	public RealMatrix getRowMatrix(int arg0) throws MatrixIndexException {
 		throw new RuntimeException("Not supported method call");
 	}
 
-	@Override
 	public RealMatrix getSubMatrix(int[] arg0, int[] arg1)
 			throws MatrixIndexException {
 		throw new RuntimeException("Not supported method call");
 	}
 
-	@Override
 	public RealMatrix getSubMatrix(int arg0, int arg1, int arg2, int arg3)
 			throws MatrixIndexException {
 		throw new RuntimeException("Not supported method call");
 	}
 
-	@Override
 	public double getTrace() {
 		throw new RuntimeException("Not supported method call");
 	}
 
-	@Override
 	public RealMatrix inverse() throws InvalidMatrixException {
 		throw new RuntimeException("Not supported method call");
 	}
 
-	@Override
 	public boolean isSingular() {
 		throw new RuntimeException("Not supported method call");
 	}
 
-	@Override
 	public boolean isSquare() {
 		throw new RuntimeException("Not supported method call");
 	}
 
-	@Override
 	public RealMatrix multiply(RealMatrix m) throws IllegalArgumentException {
 		QueryMatrix qm = (QueryMatrix) m;
 		if (this.getColumnDimension() != qm.getRowDimension()) {
@@ -180,50 +161,41 @@ public class CRSMatrix implements RealMatrix, Serializable {
 
 	}
 
-	@Override
 	public double[] operate(double[] arg0) throws IllegalArgumentException {
 		throw new RuntimeException("Not supported method call");
 	}
 
-	@Override
 	public RealMatrix preMultiply(RealMatrix arg0)
 			throws IllegalArgumentException {
 		throw new RuntimeException("Not supported method call");
 	}
 
-	@Override
 	public double[] preMultiply(double[] arg0) throws IllegalArgumentException {
 		throw new RuntimeException("Not supported method call");
 	}
 
-	@Override
 	public RealMatrix scalarAdd(double arg0) {
 		throw new RuntimeException("Not supported method call");
 	}
 
-	@Override
 	public RealMatrix scalarMultiply(double arg0) {
 		throw new RuntimeException("Not supported method call");
 	}
 
-	@Override
 	public double[] solve(double[] arg0) throws IllegalArgumentException,
 			InvalidMatrixException {
 		throw new RuntimeException("Not supported method call");
 	}
 
-	@Override
 	public RealMatrix solve(RealMatrix arg0) throws IllegalArgumentException,
 			InvalidMatrixException {
 		throw new RuntimeException("Not supported method call");
 	}
 
-	@Override
 	public RealMatrix subtract(RealMatrix arg0) throws IllegalArgumentException {
 		throw new RuntimeException("Not supported method call");
 	}
 
-	@Override
 	public RealMatrix transpose() {
 		throw new RuntimeException("Not supported method call");
 	}
