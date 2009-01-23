@@ -1478,12 +1478,12 @@ public class SddConputer {
 			cnt += write_svector_value_count(A.col[k]);
 
 		CRSMatrix mat = new CRSMatrix(A.m, A.k, cnt);
-
+		mat.next();
 		/* Simply write each svector to the file in sequence. */
 		for (int k = 0; k < A.k; k++) {
 			write_svector(A.col[k], mat);
 		}
-		mat.next();
+		// mat.next();
 		// mat.freez();
 		return mat;
 
