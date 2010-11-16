@@ -7,8 +7,12 @@ import java.util.List;
 
 import org.apache.commons.math.linear.InvalidMatrixException;
 import org.apache.commons.math.linear.MatrixIndexException;
+import org.apache.commons.math.linear.MatrixVisitorException;
 import org.apache.commons.math.linear.RealMatrix;
+import org.apache.commons.math.linear.RealMatrixChangingVisitor;
 import org.apache.commons.math.linear.RealMatrixImpl;
+import org.apache.commons.math.linear.RealMatrixPreservingVisitor;
+import org.apache.commons.math.linear.RealVector;
 
 public class CRSMatrix implements RealMatrix, Serializable {
 
@@ -197,6 +201,188 @@ public class CRSMatrix implements RealMatrix, Serializable {
 	}
 
 	public RealMatrix transpose() {
+		throw new RuntimeException("Not supported method call");
+	}
+
+	@Override
+	public void addToEntry(int arg0, int arg1, double arg2)
+			throws MatrixIndexException {
+		throw new RuntimeException("Not supported method call");
+	}
+
+	@Override
+	public void copySubMatrix(int[] arg0, int[] arg1, double[][] arg2)
+			throws MatrixIndexException, IllegalArgumentException {
+		throw new RuntimeException("Not supported method call");
+	}
+
+	@Override
+	public void copySubMatrix(int arg0, int arg1, int arg2, int arg3,
+			double[][] arg4) throws MatrixIndexException,
+			IllegalArgumentException {
+		throw new RuntimeException("Not supported method call");
+	}
+
+	@Override
+	public RealMatrix createMatrix(int arg0, int arg1) {
+		throw new RuntimeException("Not supported method call");
+	}
+
+	@Override
+	public RealVector getColumnVector(int arg0) throws MatrixIndexException {
+		throw new RuntimeException("Not supported method call");
+	}
+
+	@Override
+	public double getFrobeniusNorm() {
+		throw new RuntimeException("Not supported method call");
+	}
+
+	@Override
+	public RealVector getRowVector(int arg0) throws MatrixIndexException {
+		throw new RuntimeException("Not supported method call");
+	}
+
+	@Override
+	public void multiplyEntry(int arg0, int arg1, double arg2)
+			throws MatrixIndexException {
+		throw new RuntimeException("Not supported method call");
+	}
+
+	@Override
+	public RealVector operate(RealVector arg0) throws IllegalArgumentException {
+		throw new RuntimeException("Not supported method call");
+	}
+
+	@Override
+	public RealVector preMultiply(RealVector arg0)
+			throws IllegalArgumentException {
+		throw new RuntimeException("Not supported method call");
+	}
+
+	@Override
+	public void setColumn(int arg0, double[] arg1) throws MatrixIndexException,
+			InvalidMatrixException {
+		throw new RuntimeException("Not supported method call");
+	}
+
+	@Override
+	public void setColumnMatrix(int arg0, RealMatrix arg1)
+			throws MatrixIndexException, InvalidMatrixException {
+		throw new RuntimeException("Not supported method call");
+	}
+
+	@Override
+	public void setColumnVector(int arg0, RealVector arg1)
+			throws MatrixIndexException, InvalidMatrixException {
+		throw new RuntimeException("Not supported method call");
+	}
+
+	@Override
+	public void setEntry(int arg0, int arg1, double arg2)
+			throws MatrixIndexException {
+		throw new RuntimeException("Not supported method call");
+	}
+
+	@Override
+	public void setRow(int arg0, double[] arg1) throws MatrixIndexException,
+			InvalidMatrixException {
+		throw new RuntimeException("Not supported method call");
+	}
+
+	@Override
+	public void setRowMatrix(int arg0, RealMatrix arg1)
+			throws MatrixIndexException, InvalidMatrixException {
+		throw new RuntimeException("Not supported method call");
+	}
+
+	@Override
+	public void setRowVector(int arg0, RealVector arg1)
+			throws MatrixIndexException, InvalidMatrixException {
+		throw new RuntimeException("Not supported method call");
+	}
+
+	@Override
+	public void setSubMatrix(double[][] arg0, int arg1, int arg2)
+			throws MatrixIndexException {
+		throw new RuntimeException("Not supported method call");
+	}
+
+	@Override
+	public double walkInColumnOrder(RealMatrixChangingVisitor arg0)
+			throws MatrixVisitorException {
+		throw new RuntimeException("Not supported method call");
+	}
+
+	@Override
+	public double walkInColumnOrder(RealMatrixPreservingVisitor arg0)
+			throws MatrixVisitorException {
+		throw new RuntimeException("Not supported method call");
+	}
+
+	@Override
+	public double walkInColumnOrder(RealMatrixChangingVisitor arg0, int arg1,
+			int arg2, int arg3, int arg4) throws MatrixIndexException,
+			MatrixVisitorException {
+		throw new RuntimeException("Not supported method call");
+	}
+
+	@Override
+	public double walkInColumnOrder(RealMatrixPreservingVisitor arg0, int arg1,
+			int arg2, int arg3, int arg4) throws MatrixIndexException,
+			MatrixVisitorException {
+		throw new RuntimeException("Not supported method call");
+	}
+
+	@Override
+	public double walkInOptimizedOrder(RealMatrixChangingVisitor arg0)
+			throws MatrixVisitorException {
+		throw new RuntimeException("Not supported method call");
+	}
+
+	@Override
+	public double walkInOptimizedOrder(RealMatrixPreservingVisitor arg0)
+			throws MatrixVisitorException {
+		throw new RuntimeException("Not supported method call");
+	}
+
+	@Override
+	public double walkInOptimizedOrder(RealMatrixChangingVisitor arg0,
+			int arg1, int arg2, int arg3, int arg4)
+			throws MatrixIndexException, MatrixVisitorException {
+		throw new RuntimeException("Not supported method call");
+	}
+
+	@Override
+	public double walkInOptimizedOrder(RealMatrixPreservingVisitor arg0,
+			int arg1, int arg2, int arg3, int arg4)
+			throws MatrixIndexException, MatrixVisitorException {
+		throw new RuntimeException("Not supported method call");
+	}
+
+	@Override
+	public double walkInRowOrder(RealMatrixChangingVisitor arg0)
+			throws MatrixVisitorException {
+		throw new RuntimeException("Not supported method call");
+	}
+
+	@Override
+	public double walkInRowOrder(RealMatrixPreservingVisitor arg0)
+			throws MatrixVisitorException {
+		throw new RuntimeException("Not supported method call");
+	}
+
+	@Override
+	public double walkInRowOrder(RealMatrixChangingVisitor arg0, int arg1,
+			int arg2, int arg3, int arg4) throws MatrixIndexException,
+			MatrixVisitorException {
+		throw new RuntimeException("Not supported method call");
+	}
+
+	@Override
+	public double walkInRowOrder(RealMatrixPreservingVisitor arg0, int arg1,
+			int arg2, int arg3, int arg4) throws MatrixIndexException,
+			MatrixVisitorException {
 		throw new RuntimeException("Not supported method call");
 	}
 

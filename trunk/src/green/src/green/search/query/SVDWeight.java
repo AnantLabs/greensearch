@@ -271,7 +271,7 @@ public class SVDWeight implements Weight {
 			RealMatrix z_vt_k_e = z_vt_k.getColumnMatrix(docnm);
 
 			// ƒmƒ‹ƒ€‚ÌŒvŽZ
-			double nrmdl = z_vt_k_e.getNorm();
+			double nrmdl = z_vt_k_e.getFrobeniusNorm();
 			if (nrmdl == 0)
 				return 0;
 
@@ -289,7 +289,7 @@ public class SVDWeight implements Weight {
 
 			// ƒmƒ‹ƒ€‚ÌŒvŽZ
 			if (nrmdr == -1) {
-				nrmdr = qm.getNorm();
+				nrmdr = qm.getFrobeniusNorm();
 				System.out.println("### nrmdr : nrmdl = " + nrmdr + "\t:\t"
 						+ nrmdl);
 			}
@@ -299,12 +299,12 @@ public class SVDWeight implements Weight {
 			// System.out.println("## upper.getNorm() = " + upper.getNorm());
 
 			// —Þ•p“x‚ÌŒvŽZ
-			double sim = Math.pow(10, 16) * (1 + upper.getNorm())
+			double sim = Math.pow(10, 16) * (1 + upper.getFrobeniusNorm())
 					/ (nrmdl * nrmdr);
 
 			// if (sim != 0)
 			System.out.println("### docnm = " + docnm + "\tsim = "
-					+ (float) (sim) + "\t: " + (1 + upper.getNorm()) + "/ ("
+					+ (float) (sim) + "\t: " + (1 + upper.getFrobeniusNorm()) + "/ ("
 					+ (nrmdl * nrmdr) + ")" + "\t: " + this.scorer.score());
 
 			return (float) sim;
